@@ -156,7 +156,7 @@ const Deposito: React.FC<DepositoProps> = ({ user, userBalance, onUpdateBalance,
                 <button
                   key={item.value}
                   onClick={() => handleValueSelect(item.value)}
-                  className={`relative p-2 rounded-lg font-bold text-sm transition-all duration-200 ${
+                  className={`relative p-4 rounded-lg font-normal text-sm transition-all duration-200 ${
                     selectedValue === item.value
                       ? 'bg-green-500 text-white'
                       : 'text-white hover:bg-gray-700'
