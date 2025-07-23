@@ -61,7 +61,7 @@ const Deposito: React.FC<DepositoProps> = ({ user, userBalance, onUpdateBalance,
   return (
     <div className="min-h-screen text-white" style={{ backgroundColor: '#0e1015' }}>
       {/* Header */}
-      <header className="border-b border-gray-700 px-6 py-4" style={{ backgroundColor: '#0e1015' }}>
+      <header className="border-b border-gray-700 px-6 py-2" style={{ backgroundColor: '#0e1015' }}>
         <div className="max-w-7xl mx-auto flex items-center justify-between">
           {/* Logo */}
           <div className="flex items-center space-x-2">
@@ -183,7 +183,7 @@ const Deposito: React.FC<DepositoProps> = ({ user, userBalance, onUpdateBalance,
                   onChange={handleCustomValueChange}
                   min="30"
                   max="5000"
-                  className="bg-transparent text-white text-xl font-bold flex-1 border-none outline-none"
+                  className="bg-transparent text-white text-xl font-normal flex-1 border-none outline-none"
                   placeholder="60"
                   style={{ 
                     appearance: 'textfield',
