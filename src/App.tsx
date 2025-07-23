@@ -100,6 +100,16 @@ function HomePage() {
     }
     return (names[0].charAt(0) + names[names.length - 1].charAt(0)).toUpperCase();
   };
+
+  const handleRaspadinhaClick = (raspadinhaId: string) => {
+    if (!isLoggedIn) {
+      setShowModal(true);
+      setModalType('login');
+      return;
+    }
+    navigate(`/raspadinha${raspadinhaId}/`);
+  };
+
   return (
     <div className="min-h-screen text-white" style={{ backgroundColor: '#0e1015' }}>
       {/* Header */}
@@ -272,7 +282,10 @@ function HomePage() {
                 <p className="text-gray-400 text-xs mb-3 leading-tight">
                   Raspe e receba prêmios em DINHEIRO $$$ até R$2.000 diretamente no seu PIX
                 </p>
-                <button className="w-full bg-green-500 hover:bg-green-600 text-white py-2 px-3 rounded font-medium flex items-center justify-center space-x-2 text-sm">
+                <button 
+                  onClick={() => handleRaspadinhaClick('1')}
+                  className="w-full bg-green-500 hover:bg-green-600 text-white py-2 px-3 rounded font-medium flex items-center justify-center space-x-2 text-sm"
+                >
                   <span>Jogar Raspadinha</span>
                   <ArrowRight className="w-4 h-4" />
                 </button>
@@ -299,7 +312,10 @@ function HomePage() {
                 <p className="text-gray-400 text-xs mb-3 leading-tight">
                   Eletro, eletrônicos e componentes, receba prêmios exclusivos de alto valor agregado, o...
                 </p>
-                <button className="w-full bg-green-500 hover:bg-green-600 text-white py-2 px-3 rounded font-medium flex items-center justify-center space-x-2 text-sm">
+                <button 
+                  onClick={() => handleRaspadinhaClick('2')}
+                  className="w-full bg-green-500 hover:bg-green-600 text-white py-2 px-3 rounded font-medium flex items-center justify-center space-x-2 text-sm"
+                >
                   <span>Jogar Raspadinha</span>
                   <ArrowRight className="w-4 h-4" />
                 </button>
@@ -326,7 +342,10 @@ function HomePage() {
                 <p className="text-gray-400 text-xs mb-3 leading-tight">
                   Shopee, shein, presentinhos... Quer se mimar mas tá muito caro? não se preocupe, é só dar...
                 </p>
-                <button className="w-full bg-green-500 hover:bg-green-600 text-white py-2 px-3 rounded font-medium flex items-center justify-center space-x-2 text-sm">
+                <button 
+                  onClick={() => handleRaspadinhaClick('3')}
+                  className="w-full bg-green-500 hover:bg-green-600 text-white py-2 px-3 rounded font-medium flex items-center justify-center space-x-2 text-sm"
+                >
                   <span>Jogar Raspadinha</span>
                   <ArrowRight className="w-4 h-4" />
                 </button>
@@ -353,7 +372,10 @@ function HomePage() {
                 <p className="text-gray-400 text-xs mb-3 leading-tight">
                   Cansado de ficar a pé? Essa sua chance de sair motorizado, prêmios de até R$20.000
                 </p>
-                <button className="w-full bg-green-500 hover:bg-green-600 text-white py-2 px-3 rounded font-medium flex items-center justify-center space-x-2 text-sm">
+                <button 
+                  onClick={() => handleRaspadinhaClick('4')}
+                  className="w-full bg-green-500 hover:bg-green-600 text-white py-2 px-3 rounded font-medium flex items-center justify-center space-x-2 text-sm"
+                >
                   <span>Jogar Raspadinha</span>
                   <ArrowRight className="w-4 h-4" />
                 </button>
