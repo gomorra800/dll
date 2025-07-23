@@ -184,17 +184,17 @@ const PixNaConta: React.FC<PixNaContaProps> = ({ user, userBalance, onUpdateBala
             </button>
 
             {/* Raspadinha Info */}
-            <div className="flex items-start space-x-4 mb-8 p-4 rounded-lg" style={{ backgroundColor: '#111219' }}>
-              <div className="flex-shrink-0">
+            <div className="flex items-center space-x-4 mb-8 p-4 rounded-lg" style={{ backgroundColor: '#111219' }}>
+              <div className="flex-shrink-0 w-16 h-16">
                 <img 
                   src="/perficial.png" 
                   alt="PIX na conta" 
-                  className="w-20 h-20 rounded-lg object-cover"
+                  className="w-16 h-16 rounded object-cover"
                 />
               </div>
-              <div className="flex-1">
-                <h3 className="text-white font-bold text-xl mb-2">PIX na conta</h3>
-                <p className="text-gray-300 text-sm leading-relaxed">
+              <div className="flex-1 text-left">
+                <h3 className="text-white font-bold text-lg mb-1">PIX na conta</h3>
+                <p className="text-gray-300 text-sm">
                   Raspe e receba prêmios em DINHEIRO $$$ até R$2.000 diretamente no seu PIX
                 </p>
               </div>
@@ -211,11 +211,11 @@ const PixNaConta: React.FC<PixNaContaProps> = ({ user, userBalance, onUpdateBala
             <div className="grid grid-cols-4 gap-4">
               {prizes.map((prize) => (
                 <div key={prize.id} className="text-center">
-                  <div className="w-full h-40 mb-3 rounded-lg flex items-center justify-center p-3" style={{ backgroundColor: '#1a1d24' }}>
+                  <div className="w-full h-48 mb-3 rounded-lg flex items-center justify-center p-2" style={{ backgroundColor: '#1a1d24' }}>
                     <img 
                       src={prize.image} 
                       alt={prize.name} 
-                      className="w-28 h-28 object-contain"
+                      className="w-36 h-36 object-contain"
                     />
                   </div>
                   <div className="px-1">
