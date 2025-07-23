@@ -114,6 +114,14 @@ const Deposito: React.FC<DepositoProps> = ({ user, userBalance, onUpdateBalance,
               </div>
               <ChevronDown className="w-4 h-4 text-gray-400" />
             </div>
+
+            <style jsx>{`
+              input[type="number"]::-webkit-outer-spin-button,
+              input[type="number"]::-webkit-inner-spin-button {
+                -webkit-appearance: none;
+                margin: 0;
+              }
+            `}</style>
           </div>
         </div>
       </header>
@@ -143,12 +151,12 @@ const Deposito: React.FC<DepositoProps> = ({ user, userBalance, onUpdateBalance,
             </div>
 
             {/* Predefined Values Grid */}
-            <div className="grid grid-cols-3 gap-3 mb-6">
+            <div className="grid grid-cols-3 gap-2 mb-6">
               {predefinedValues.map((item) => (
                 <button
                   key={item.value}
                   onClick={() => handleValueSelect(item.value)}
-                  className={`relative p-3 rounded-lg font-bold text-base transition-all duration-200 ${
+                  className={`relative p-2 rounded-lg font-bold text-sm transition-all duration-200 ${
                     selectedValue === item.value
                       ? 'bg-green-500 text-white'
                       : 'text-white hover:bg-gray-700'
@@ -156,12 +164,12 @@ const Deposito: React.FC<DepositoProps> = ({ user, userBalance, onUpdateBalance,
                   style={selectedValue !== item.value ? { backgroundColor: '#111219' } : {}}
                 >
                   {item.recommended && (
-                    <div className="absolute -top-1 -right-1 bg-yellow-500 text-black text-xs font-bold px-1.5 py-0.5 rounded-full">
+                    <div className="absolute -top-1 -right-1 bg-yellow-500 text-black text-xs font-bold px-1 py-0.5 rounded-full">
                       Recomendado
                     </div>
                   )}
-                  <div className="mb-2">{item.label}</div>
-                  <div className="bg-yellow-500 text-black text-xs font-bold px-2 py-1 rounded-full inline-block">
+                  <div className="mb-1">{item.label}</div>
+                  <div className="bg-yellow-500 text-black text-xs font-bold px-1.5 py-0.5 rounded-full inline-block">
                     {item.badge}
                   </div>
                 </button>
@@ -170,16 +178,20 @@ const Deposito: React.FC<DepositoProps> = ({ user, userBalance, onUpdateBalance,
 
             {/* Custom Value Input */}
             <div className="space-y-4">
-              <div className="flex items-center justify-center space-x-4">
-                <span className="text-white text-lg">R$</span>
+              <div className="flex items-center space-x-2 p-3 rounded-lg border border-gray-600" style={{ backgroundColor: '#111219' }}>
+                <span className="text-white text-lg font-bold">R$</span>
                 <input
                   type="number"
                   value={customValue}
                   onChange={handleCustomValueChange}
                   min="30"
                   max="5000"
-                  className="bg-transparent text-white text-2xl font-bold text-center border-none outline-none w-32"
+                  className="bg-transparent text-white text-xl font-bold flex-1 border-none outline-none"
                   placeholder="60"
+                  style={{ 
+                    appearance: 'textfield',
+                    MozAppearance: 'textfield'
+                  }}
                 />
               </div>
               
