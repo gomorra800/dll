@@ -120,35 +120,35 @@ const Deposito: React.FC<DepositoProps> = ({ user, userBalance, onUpdateBalance,
 
       {/* Main Content */}
       <div className="px-6 py-8">
-        <div className="max-w-4xl mx-auto">
+        <div className="max-w-2xl mx-auto">
           {/* Banner */}
           <div className="mb-8">
             <img 
               src="/dodeposito.png" 
               alt="Banner de depósito" 
-              className="w-full h-48 object-cover rounded-lg"
+              className="w-full h-40 object-cover rounded-lg"
             />
           </div>
 
           {/* Deposit Form */}
           <div className="space-y-6">
-            <h2 className="text-2xl font-bold text-center text-white mb-8">
+            <h2 className="text-xl font-bold text-center text-white mb-6">
               Digite ou selecione o valor
             </h2>
 
             {/* Payment Method Info */}
-            <div className="flex items-center justify-center space-x-2 p-4 rounded-lg border border-green-500/30" style={{ backgroundColor: '#111219' }}>
+            <div className="flex items-center justify-center space-x-2 p-3 rounded-lg border border-green-500/30" style={{ backgroundColor: '#111219' }}>
               <Shield className="w-5 h-5 text-green-500" />
-              <span className="text-green-400 font-medium">Método de pagamento seguro</span>
+              <span className="text-green-400 font-medium text-sm">Método de pagamento seguro</span>
             </div>
 
             {/* Predefined Values Grid */}
-            <div className="grid grid-cols-3 gap-4 mb-6">
+            <div className="grid grid-cols-3 gap-3 mb-6">
               {predefinedValues.map((item) => (
                 <button
                   key={item.value}
                   onClick={() => handleValueSelect(item.value)}
-                  className={`relative p-4 rounded-lg font-bold text-lg transition-all duration-200 ${
+                  className={`relative p-3 rounded-lg font-bold text-base transition-all duration-200 ${
                     selectedValue === item.value
                       ? 'bg-green-500 text-white'
                       : 'text-white hover:bg-gray-700'
@@ -156,7 +156,7 @@ const Deposito: React.FC<DepositoProps> = ({ user, userBalance, onUpdateBalance,
                   style={selectedValue !== item.value ? { backgroundColor: '#111219' } : {}}
                 >
                   {item.recommended && (
-                    <div className="absolute -top-2 -right-2 bg-yellow-500 text-black text-xs font-bold px-2 py-1 rounded-full">
+                    <div className="absolute -top-1 -right-1 bg-yellow-500 text-black text-xs font-bold px-1.5 py-0.5 rounded-full">
                       Recomendado
                     </div>
                   )}
@@ -193,7 +193,7 @@ const Deposito: React.FC<DepositoProps> = ({ user, userBalance, onUpdateBalance,
             <button
               onClick={handleGeneratePix}
               disabled={!selectedValue || selectedValue < 30}
-              className="w-full bg-green-500 hover:bg-green-600 disabled:bg-gray-600 disabled:cursor-not-allowed text-white py-4 rounded-lg font-bold text-lg flex items-center justify-center space-x-2 transition-colors"
+              className="w-full bg-green-500 hover:bg-green-600 disabled:bg-gray-600 disabled:cursor-not-allowed text-white py-3 rounded-lg font-bold text-base flex items-center justify-center space-x-2 transition-colors"
             >
               <Shield className="w-5 h-5" />
               <span>Gerar PIX</span>
