@@ -22,18 +22,18 @@ const PixNaConta: React.FC<PixNaContaProps> = ({ user, userBalance, onUpdateBala
   const raspadinhaPrice = 0.50;
 
   const prizes: Prize[] = [
-    { id: '1', name: '2 Mil Reais', value: 'R$ 2000,00', image: '/money-2000.png' },
-    { id: '2', name: 'Mil Reais', value: 'R$ 1000,00', image: '/money-1000.png' },
-    { id: '3', name: '500 Reais', value: 'R$ 500,00', image: '/money-500.png' },
-    { id: '4', name: '200 Reais', value: 'R$ 200,00', image: '/money-200.png' },
-    { id: '5', name: '100 Reais', value: 'R$ 100,00', image: '/money-100.png' },
-    { id: '6', name: '50 Reais', value: 'R$ 50,00', image: '/money-50.png' },
-    { id: '7', name: '20 Reais', value: 'R$ 20,00', image: '/money-20.png' },
-    { id: '8', name: '10 Reais', value: 'R$ 10,00', image: '/money-10.png' },
-    { id: '9', name: '5 Reais', value: 'R$ 5,00', image: '/money-5.png' },
-    { id: '10', name: '2 Reais', value: 'R$ 2,00', image: '/money-2.png' },
-    { id: '11', name: '1 Real', value: 'R$ 1,00', image: '/money-1.png' },
-    { id: '12', name: '50 Centavos', value: 'R$ 0,50', image: '/money-050.png' }
+    { id: '1', name: '2 Mil Reais', value: 'R$ 2000,00', image: '/2milreais.png' },
+    { id: '2', name: 'Mil Reais', value: 'R$ 1000,00', image: '/milreais.png' },
+    { id: '3', name: '500 Reais', value: 'R$ 500,00', image: '/500reais.png' },
+    { id: '4', name: '200 Reais', value: 'R$ 200,00', image: '/200reais.png' },
+    { id: '5', name: '100 Reais', value: 'R$ 100,00', image: '/100reais.png' },
+    { id: '6', name: '50 Reais', value: 'R$ 50,00', image: '/50reais.png' },
+    { id: '7', name: '20 Reais', value: 'R$ 20,00', image: '/20reais.png' },
+    { id: '8', name: '10 Reais', value: 'R$ 10,00', image: '/10reais.png' },
+    { id: '9', name: '5 Reais', value: 'R$ 5,00', image: '/5reais.png' },
+    { id: '10', name: '2 Reais', value: 'R$ 2,00', image: '/2reais.png' },
+    { id: '11', name: '1 Real', value: 'R$ 1,00', image: '/1real.png' },
+    { id: '12', name: '50 Centavos', value: 'R$ 0,50', image: '/50centavos.png' }
   ];
 
   // Função para obter as iniciais do nome
@@ -210,10 +210,11 @@ const PixNaConta: React.FC<PixNaContaProps> = ({ user, userBalance, onUpdateBala
               {prizes.map((prize) => (
                 <div key={prize.id} className="text-center">
                   <div className="w-full h-32 mb-3 rounded-lg flex items-center justify-center p-2" style={{ backgroundColor: '#1a1d24' }}>
-                    {/* Placeholder for money images - you can replace with actual images */}
-                    <div className="w-20 h-16 bg-gradient-to-r from-green-400 to-green-600 rounded flex items-center justify-center text-white text-sm font-bold">
-                      {prize.name.includes('Centavos') ? '¢' : 'R$'}
-                    </div>
+                    <img 
+                      src={prize.image} 
+                      alt={prize.name} 
+                      className="w-20 h-20 object-contain"
+                    />
                   </div>
                   <div className="px-1">
                     <h4 className="text-white font-medium text-sm mb-1 leading-tight">{prize.name}</h4>
