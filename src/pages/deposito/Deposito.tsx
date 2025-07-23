@@ -134,7 +134,7 @@ const Deposito: React.FC<DepositoProps> = ({ user, userBalance, onUpdateBalance,
             <img 
               src="/dodeposito.png" 
               alt="Banner de depósito" 
-              className="w-full h-40 object-cover rounded-lg"
+              className="w-full h-24 object-cover rounded-lg"
             />
           </div>
 
@@ -163,15 +163,7 @@ const Deposito: React.FC<DepositoProps> = ({ user, userBalance, onUpdateBalance,
                   }`}
                   style={selectedValue !== item.value ? { backgroundColor: '#111219' } : {}}
                 >
-                  {item.recommended && (
-                    <div className="absolute -top-1 -right-1 bg-yellow-500 text-black text-xs font-bold px-1 py-0.5 rounded-full">
-                      Recomendado
-                    </div>
-                  )}
-                  <div className="mb-1">{item.label}</div>
-                  <div className="bg-yellow-500 text-black text-xs font-bold px-1.5 py-0.5 rounded-full inline-block">
-                    {item.badge}
-                  </div>
+                  <div>{item.label}</div>
                 </button>
               ))}
             </div>
