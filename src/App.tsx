@@ -186,7 +186,9 @@ function HomePage() {
       </header>
 
       {/* Main Banner Area */}
-      <Carousel images={bannerImages} autoSlideInterval={5000} />
+      <div className="pt-4">
+        <Carousel images={bannerImages} autoSlideInterval={5000} />
+      </div>
 
       {/* Categories */}
       <div className="px-6 py-6">
