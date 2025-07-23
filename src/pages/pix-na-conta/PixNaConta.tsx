@@ -149,55 +149,57 @@ const PixNaConta: React.FC<PixNaContaProps> = ({ user, userBalance, onUpdateBala
       {/* Main Content */}
       <div className="px-6 py-8">
         <div className="max-w-4xl mx-auto">
-          {/* Central Area */}
-          <div className="text-center mb-8">
-            <div className="mb-6">
-              <div className="w-24 h-24 mx-auto mb-4 rounded-full flex items-center justify-center" style={{ backgroundColor: '#1a1d24' }}>
-                <ShoppingBag className="w-12 h-12 text-gray-400" />
-              </div>
-              <h1 className="text-4xl font-bold text-gray-300 mb-2">RASPE AQUI!</h1>
-              <p className="text-gray-400 text-sm mb-2">
-                Raspe os 3 símbolos iguais e encontre
-              </p>
-              <p className="text-gray-400 text-sm mb-6">
-                3 símbolos iguais e ganhe o prêmio!
-              </p>
-              <p className="text-gray-300 text-sm mb-2">
-                Compre uma raspadinha para começar a jogar
-              </p>
-              <p className="text-gray-400 text-xs">
-                Clique no botão abaixo para comprar
-              </p>
+          {/* Raspe Aqui Section */}
+          <div className="text-center mb-8 p-8 rounded-lg" style={{ backgroundColor: '#111219' }}>
+            <div className="w-24 h-24 mx-auto mb-4 rounded-full flex items-center justify-center" style={{ backgroundColor: '#1a1d24' }}>
+              <ShoppingBag className="w-12 h-12 text-gray-400" />
             </div>
+            <h1 className="text-4xl font-bold text-gray-300 mb-2">RASPE AQUI!</h1>
+            <p className="text-gray-400 text-sm mb-2">
+              Raspe os 3 símbolos iguais e encontre
+            </p>
+            <p className="text-gray-400 text-sm mb-6">
+              3 símbolos iguais e ganhe o prêmio!
+            </p>
+            <p className="text-gray-300 text-sm mb-2">
+              Compre uma raspadinha para começar a jogar
+            </p>
+            <p className="text-gray-400 text-xs">
+              Clique no botão abaixo para comprar
+            </p>
+          </div>
 
-            {/* Buy Button */}
+          {/* Buy Button - Outside and wider */}
+          <div className="mb-8">
             <button
               onClick={handleBuyRaspadinha}
               disabled={isPlaying}
-              className="bg-green-500 hover:bg-green-600 disabled:bg-gray-600 disabled:cursor-not-allowed text-white px-8 py-3 rounded-lg font-bold text-lg flex items-center justify-center space-x-3 mx-auto mb-8"
+              className="w-full bg-green-500 hover:bg-green-600 disabled:bg-gray-600 disabled:cursor-not-allowed text-white px-6 py-4 rounded-lg font-bold text-lg flex items-center justify-between"
             >
-              <ShoppingBag className="w-6 h-6" />
-              <span>{isPlaying ? 'Jogando...' : 'Comprar Raspadinha'}</span>
-              <span className="bg-black bg-opacity-30 px-2 py-1 rounded text-sm">
+              <div className="flex items-center space-x-3">
+                <ShoppingBag className="w-6 h-6" />
+                <span>{isPlaying ? 'Jogando...' : 'Comprar Raspadinha'}</span>
+              </div>
+              <span className="bg-black bg-opacity-30 px-3 py-1 rounded text-base font-bold">
                 R$ 0,50
               </span>
             </button>
+          </div>
 
-            {/* Raspadinha Info */}
-            <div className="flex items-center space-x-4 mb-8 p-4 rounded-lg" style={{ backgroundColor: '#111219' }}>
-              <div className="flex-shrink-0 w-16 h-16">
-                <img 
-                  src="/perficial.png" 
-                  alt="PIX na conta" 
-                  className="w-16 h-16 rounded object-cover"
-                />
-              </div>
-              <div className="flex-1 text-left">
-                <h3 className="text-white font-bold text-lg mb-1">PIX na conta</h3>
-                <p className="text-gray-300 text-sm">
-                  Raspe e receba prêmios em DINHEIRO $$$ até R$2.000 diretamente no seu PIX
-                </p>
-              </div>
+          {/* Raspadinha Info */}
+          <div className="flex items-center space-x-4 mb-8 p-4 rounded-lg" style={{ backgroundColor: '#111219' }}>
+            <div className="flex-shrink-0 w-16 h-16">
+              <img 
+                src="/perficial.png" 
+                alt="PIX na conta" 
+                className="w-16 h-16 rounded object-cover"
+              />
+            </div>
+            <div className="flex-1 text-left">
+              <h3 className="text-white font-bold text-lg mb-1">PIX na conta</h3>
+              <p className="text-gray-300 text-sm">
+                Raspe e receba prêmios em DINHEIRO $$$ até R$2.000 diretamente no seu PIX
+              </p>
             </div>
           </div>
 
@@ -208,18 +210,18 @@ const PixNaConta: React.FC<PixNaContaProps> = ({ user, userBalance, onUpdateBala
             </h2>
 
             {/* Prizes Grid */}
-            <div className="grid grid-cols-4 gap-4">
+            <div className="grid grid-cols-4 gap-3">
               {prizes.map((prize) => (
                 <div key={prize.id} className="text-center">
-                  <div className="w-full h-48 mb-3 rounded-lg flex items-center justify-center p-2" style={{ backgroundColor: '#1a1d24' }}>
+                  <div className="w-full h-36 mb-2 rounded-lg flex items-center justify-center p-2" style={{ backgroundColor: '#1a1d24' }}>
                     <img 
                       src={prize.image} 
                       alt={prize.name} 
-                      className="w-36 h-36 object-contain"
+                      className="w-28 h-28 object-contain"
                     />
                   </div>
                   <div className="px-1">
-                    <h4 className="text-white font-medium text-sm mb-1 leading-tight">{prize.name}</h4>
+                    <h4 className="text-white font-medium text-xs mb-1 leading-tight">{prize.name}</h4>
                     <p className="text-gray-400 text-xs">{prize.value}</p>
                   </div>
                 </div>
