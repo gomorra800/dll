@@ -103,7 +103,7 @@ function HomePage() {
   return (
     <div className="min-h-screen text-white" style={{ backgroundColor: '#0e1015' }}>
       {/* Header */}
-      <header className="border-b border-gray-700 px-6 py-4" style={{ backgroundColor: '#0e1015' }}>
+      <header className="border-b border-gray-700 px-6 py-1" style={{ backgroundColor: '#0e1015' }}>
         <div className="max-w-7xl mx-auto flex items-center justify-between">
           {/* Logo */}
           <div className="flex items-center space-x-2">
