@@ -150,7 +150,7 @@ const PixNaConta: React.FC<PixNaContaProps> = ({ user, userBalance, onUpdateBala
       <div className="px-6 py-8">
         <div className="max-w-4xl mx-auto">
           {/* Raspe Aqui Section */}
-          <div className="text-center mb-8 p-16 rounded-lg" style={{ backgroundColor: '#111219' }}>
+          <div className="text-center mb-8 p-25 rounded-lg" style={{ backgroundColor: '#111219' }}>
             <div className="w-24 h-24 mx-auto mb-4 rounded-full flex items-center justify-center" style={{ backgroundColor: '#1a1d24' }}>
               <ShoppingBag className="w-12 h-12 text-gray-400" />
             </div>
