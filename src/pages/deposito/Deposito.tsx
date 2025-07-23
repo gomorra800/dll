@@ -14,7 +14,7 @@ const Deposito: React.FC<DepositoProps> = ({ user, userBalance, onUpdateBalance,
 
   const predefinedValues = [
     { value: 30, label: 'R$ 30,00' },
-    { value: 60, label: 'R$ 60,00', recommended: true },
+    { value: 60, label: 'R$ 60,00' },
     { value: 120, label: 'R$ 120,00' },
     { value: 240, label: 'R$ 240,00' },
     { value: 300, label: 'R$ 300,00' },
