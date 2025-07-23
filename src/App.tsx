@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route, useNavigate } from 'react-route
 import { ArrowRight, Dice1, User, LogIn, X, Phone, Mail, Lock, ShoppingCart, ChevronDown } from 'lucide-react';
 import Carousel from './components/Carousel';
 import Deposito from './pages/deposito/Deposito';
+import PixNaConta from './pages/pix-na-conta/PixNaConta';
 
 function HomePage() {
   const navigate = useNavigate();
@@ -714,12 +715,36 @@ function DepositoPage() {
   );
 }
 
+function PixNaContaPage() {
+  const navigate = useNavigate();
+  const [user] = React.useState({ name: 'João Pessoa' }); // Simulando usuário logado
+  const [userBalance, setUserBalance] = React.useState(0.00);
+
+  const handleUpdateBalance = (newBalance: number) => {
+    setUserBalance(newBalance);
+  };
+
+  const handleBackToHome = () => {
+    navigate('/');
+  };
+
+  return (
+    <PixNaConta 
+      user={user}
+      userBalance={userBalance}
+      onUpdateBalance={handleUpdateBalance}
+      onBackToHome={handleBackToHome}
+    />
+  );
+}
+
 function App() {
   return (
     <Router>
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/deposito" element={<DepositoPage />} />
+        <Route path="/raspadinha1/" element={<PixNaContaPage />} />
       </Routes>
     </Router>
   );
