@@ -7,6 +7,7 @@ import PixNaConta from './pages/pix-na-conta/PixNaConta';
 import SonhoDeConsumo from './pages/sonho-de-consumo/SonhoDeConsumo';
 import MeMimei from './pages/me-mimei/MeMimei';
 import SuperPremios from './pages/super-premios/SuperPremios';
+import MinhaCarteira from './pages/minha-carteira/MinhaCarteira';
 
 function HomePage() {
   const navigate = useNavigate();
@@ -810,12 +811,36 @@ function SuperPremiosPage() {
   );
 }
 
+function MinhaCarteiraPage() {
+  const navigate = useNavigate();
+  const [user] = React.useState({ name: 'João Pessoa' }); // Simulando usuário logado
+  const [userBalance, setUserBalance] = React.useState(0.00);
+
+  const handleUpdateBalance = (newBalance: number) => {
+    setUserBalance(newBalance);
+  };
+
+  const handleBackToHome = () => {
+    navigate('/');
+  };
+
+  return (
+    <MinhaCarteira 
+      user={user}
+      userBalance={userBalance}
+      onUpdateBalance={handleUpdateBalance}
+      onBackToHome={handleBackToHome}
+    />
+  );
+}
+
 function App() {
   return (
     <Router>
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/deposito" element={<DepositoPage />} />
+        <Route path="/carteira" element={<MinhaCarteiraPage />} />
         <Route path="/raspadinha1/" element={<PixNaContaPage />} />
         <Route path="/raspadinha2/" element={<SonhoDeConsumoPage />} />
         <Route path="/raspadinha3/" element={<MeMimeiPage />} />
