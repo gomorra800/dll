@@ -13,12 +13,12 @@ const Deposito: React.FC<DepositoProps> = ({ user, userBalance, onUpdateBalance,
   const [customValue, setCustomValue] = useState<string>('60');
 
   const predefinedValues = [
-    { value: 30, label: 'R$ 30,00', badge: '+Querido' },
-    { value: 60, label: 'R$ 60,00', badge: '+Querido', recommended: true },
-    { value: 120, label: 'R$ 120,00', badge: 'Recomendado' },
-    { value: 240, label: 'R$ 240,00', badge: '+Chances' },
-    { value: 300, label: 'R$ 300,00', badge: '+Chances' },
-    { value: 600, label: 'R$ 600,00', badge: '+Chances' }
+    { value: 30, label: 'R$ 30,00' },
+    { value: 60, label: 'R$ 60,00', recommended: true },
+    { value: 120, label: 'R$ 120,00' },
+    { value: 240, label: 'R$ 240,00' },
+    { value: 300, label: 'R$ 300,00' },
+    { value: 600, label: 'R$ 600,00' }
   ];
 
   const handleValueSelect = (value: number) => {
@@ -169,9 +169,6 @@ const Deposito: React.FC<DepositoProps> = ({ user, userBalance, onUpdateBalance,
                     </div>
                   )}
                   <div className="mb-1">{item.label}</div>
-                  <div className="bg-yellow-500 text-black text-xs font-bold px-1.5 py-0.5 rounded-full inline-block">
-                    {item.badge}
-                  </div>
                 </button>
               ))}
             </div>
