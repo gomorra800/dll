@@ -122,23 +122,6 @@ const Deposito: React.FC<DepositoProps> = ({ user, userBalance, onUpdateBalance,
       <div className="px-6 py-8">
         <div className="max-w-4xl mx-auto">
           {/* Banner */}
-          <div className="mb-8 rounded-lg overflow-hidden">
-            <img 
-              src="/dodeposito.webp" 
-              alt="Banner de Depósito" 
-              className="w-full h-64 object-cover"
-            />
-          </div>
-
-          {/* Banner */}
-          <div className="mb-8 rounded-lg overflow-hidden">
-            <img 
-              src="/dodeposito.webp" 
-              alt="Banner de Depósito" 
-              className="w-full h-64 object-cover"
-            />
-          </div>
-
           {/* Deposit Form */}
           <div className="space-y-6">
             <h2 className="text-2xl font-bold text-center text-white mb-8">
