@@ -1,8 +1,11 @@
 import React from 'react';
+import { BrowserRouter as Router, Routes, Route, useNavigate } from 'react-router-dom';
 import { ArrowRight, Dice1, User, LogIn, X, Phone, Mail, Lock, ShoppingCart, ChevronDown } from 'lucide-react';
 import Carousel from './components/Carousel';
+import Deposito from './pages/deposito/Deposito';
 
-function App() {
+function HomePage() {
+  const navigate = useNavigate();
   const [showModal, setShowModal] = React.useState(false);
   const [modalType, setModalType] = React.useState('login'); // 'login' or 'register'
   const [registrationStep, setRegistrationStep] = React.useState(1); // 1 or 2
@@ -11,7 +14,7 @@ function App() {
   const [user, setUser] = React.useState(null);
   const [loginMethod, setLoginMethod] = React.useState('email'); // 'email' or 'phone'
   const [activeCategory, setActiveCategory] = React.useState('destaque');
-  const [userBalance] = React.useState(0.00); // Saldo inicial zerado
+  const [userBalance, setUserBalance] = React.useState(0.00); // Saldo inicial zerado
 
   const bannerImages = [
     '/1752257991.webp',
@@ -59,7 +62,7 @@ function App() {
     setUser(userData);
     setIsLoggedIn(true);
     setShowModal(false);
-    window.location.href = '/deposito/';
+    navigate('/deposito');
     setRegistrationStep(1);
     setRegistrationData({ name: '', phone: '' });
   };
@@ -128,7 +131,7 @@ function App() {
                 
                 {/* Botão Depositar */}
                 <button 
-                  onClick={() => window.location.href = '/deposito/'}
+                  onClick={() => navigate('/deposito')}
                   className="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg font-medium"
                 >
                   Depositar
@@ -268,7 +271,7 @@ function App() {
                   Raspe e receba prêmios em DINHEIRO $$$ até R$2.000 diretamente no seu PIX
                 </p>
                 <button className="w-full bg-green-500 hover:bg-green-600 text-white py-2 px-3 rounded font-medium flex items-center justify-center space-x-2 text-sm">
-                  <span onClick={() => window.location.href = '/raspadinha1/'}>Jogar Raspadinha</span>
+                  <span>Jogar Raspadinha</span>
                   <ArrowRight className="w-4 h-4" />
                 </button>
               </div>
@@ -295,7 +298,7 @@ function App() {
                   Eletro, eletrônicos e componentes, receba prêmios exclusivos de alto valor agregado, o...
                 </p>
                 <button className="w-full bg-green-500 hover:bg-green-600 text-white py-2 px-3 rounded font-medium flex items-center justify-center space-x-2 text-sm">
-                  <span onClick={() => window.location.href = '/raspadinha2/'}>Jogar Raspadinha</span>
+                  <span>Jogar Raspadinha</span>
                   <ArrowRight className="w-4 h-4" />
                 </button>
               </div>
@@ -322,7 +325,7 @@ function App() {
                   Shopee, shein, presentinhos... Quer se mimar mas tá muito caro? não se preocupe, é só dar...
                 </p>
                 <button className="w-full bg-green-500 hover:bg-green-600 text-white py-2 px-3 rounded font-medium flex items-center justify-center space-x-2 text-sm">
-                  <span onClick={() => window.location.href = '/raspadinha3/'}>Jogar Raspadinha</span>
+                  <span>Jogar Raspadinha</span>
                   <ArrowRight className="w-4 h-4" />
                 </button>
               </div>
@@ -349,7 +352,7 @@ function App() {
                   Cansado de ficar a pé? Essa sua chance de sair motorizado, prêmios de até R$20.000
                 </p>
                 <button className="w-full bg-green-500 hover:bg-green-600 text-white py-2 px-3 rounded font-medium flex items-center justify-center space-x-2 text-sm">
-                  <span onClick={() => window.location.href = '/raspadinha4/'}>Jogar Raspadinha</span>
+                  <span>Jogar Raspadinha</span>
                   <ArrowRight className="w-4 h-4" />
                 </button>
               </div>
@@ -661,6 +664,40 @@ function App() {
         </div>
       )}
     </div>
+  );
+}
+
+function DepositoPage() {
+  const navigate = useNavigate();
+  const [user] = React.useState({ name: 'João Pessoa' }); // Simulando usuário logado
+  const [userBalance, setUserBalance] = React.useState(0.00);
+
+  const handleUpdateBalance = (newBalance: number) => {
+    setUserBalance(newBalance);
+  };
+
+  const handleBackToHome = () => {
+    navigate('/');
+  };
+
+  return (
+    <Deposito 
+      user={user}
+      userBalance={userBalance}
+      onUpdateBalance={handleUpdateBalance}
+      onBackToHome={handleBackToHome}
+    />
+  );
+}
+
+function App() {
+  return (
+    <Router>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/deposito" element={<DepositoPage />} />
+      </Routes>
+    </Router>
   );
 }
 
