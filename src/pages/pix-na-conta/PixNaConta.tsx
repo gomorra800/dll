@@ -209,14 +209,16 @@ const PixNaConta: React.FC<PixNaContaProps> = ({ user, userBalance, onUpdateBala
             <div className="grid grid-cols-4 gap-4">
               {prizes.map((prize) => (
                 <div key={prize.id} className="text-center">
-                  <div className="w-full h-20 mb-2 rounded-lg flex items-center justify-center" style={{ backgroundColor: '#1a1d24' }}>
+                  <div className="w-full h-32 mb-3 rounded-lg flex items-center justify-center p-2" style={{ backgroundColor: '#1a1d24' }}>
                     {/* Placeholder for money images - you can replace with actual images */}
-                    <div className="w-16 h-12 bg-gradient-to-r from-green-400 to-green-600 rounded flex items-center justify-center text-white text-xs font-bold">
+                    <div className="w-20 h-16 bg-gradient-to-r from-green-400 to-green-600 rounded flex items-center justify-center text-white text-sm font-bold">
                       {prize.name.includes('Centavos') ? '¢' : 'R$'}
                     </div>
                   </div>
-                  <h4 className="text-white font-medium text-sm mb-1">{prize.name}</h4>
-                  <p className="text-gray-400 text-xs">{prize.value}</p>
+                  <div className="px-1">
+                    <h4 className="text-white font-medium text-sm mb-1 leading-tight">{prize.name}</h4>
+                    <p className="text-gray-400 text-xs">{prize.value}</p>
+                  </div>
                 </div>
               ))}
             </div>
