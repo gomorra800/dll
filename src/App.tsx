@@ -102,11 +102,6 @@ function HomePage() {
   };
 
   const handleRaspadinhaClick = (raspadinhaId: string) => {
-    if (!isLoggedIn) {
-      setShowModal(true);
-      setModalType('login');
-      return;
-    }
     navigate(`/raspadinha${raspadinhaId}/`);
   };
 
