@@ -4,6 +4,7 @@ import { ArrowRight, Dice1, User, LogIn, X, Phone, Mail, Lock, ShoppingCart, Che
 import Carousel from './components/Carousel';
 import Deposito from './pages/deposito/Deposito';
 import PixNaConta from './pages/pix-na-conta/PixNaConta';
+import SonhoDeConsumo from './pages/sonho-de-consumo/SonhoDeConsumo';
 
 function HomePage() {
   const navigate = useNavigate();
@@ -738,6 +739,29 @@ function PixNaContaPage() {
   );
 }
 
+function SonhoDeConsumoPage() {
+  const navigate = useNavigate();
+  const [user] = React.useState({ name: 'João Pessoa' }); // Simulando usuário logado
+  const [userBalance, setUserBalance] = React.useState(0.00);
+
+  const handleUpdateBalance = (newBalance: number) => {
+    setUserBalance(newBalance);
+  };
+
+  const handleBackToHome = () => {
+    navigate('/');
+  };
+
+  return (
+    <SonhoDeConsumo 
+      user={user}
+      userBalance={userBalance}
+      onUpdateBalance={handleUpdateBalance}
+      onBackToHome={handleBackToHome}
+    />
+  );
+}
+
 function App() {
   return (
     <Router>
@@ -745,6 +769,7 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/deposito" element={<DepositoPage />} />
         <Route path="/raspadinha1/" element={<PixNaContaPage />} />
+        <Route path="/raspadinha2/" element={<SonhoDeConsumoPage />} />
       </Routes>
     </Router>
   );
