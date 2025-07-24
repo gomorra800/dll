@@ -202,8 +202,8 @@ const MinhasEntregas: React.FC<MinhasEntregasProps> = ({ user, userBalance, onUp
             </div>
 
             <div className="flex items-center justify-between">
-              {/* Status Dropdown - Mais largo */}
-              <div className="relative">
+              {/* Status Dropdown - Ocupa todo espaço horizontal */}
+              <div className="relative flex-1 mr-6">
                 <button
                   onClick={() => setShowStatusDropdown(!showStatusDropdown)}
                   className="flex items-center justify-between w-full px-6 py-4 text-white rounded-lg border border-gray-600 hover:border-gray-500 focus:outline-none text-base"
@@ -246,14 +246,14 @@ const MinhasEntregas: React.FC<MinhasEntregasProps> = ({ user, userBalance, onUp
               {/* Buttons */}
               <div className="flex items-center space-x-4">
                 {/* Filter Button */}
-                <button className="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg font-medium text-sm">
+                <button className="bg-green-500 hover:bg-green-600 text-white px-3 py-1.5 rounded-lg font-medium text-sm">
                   Filtrar
                 </button>
 
                 {/* Limpar Button */}
                 <button 
                   onClick={handleLimpar}
-                  className="text-gray-400 hover:text-white px-4 py-2 font-medium text-sm"
+                  className="text-gray-400 hover:text-white px-3 py-1.5 font-medium text-sm"
                 >
                   Limpar
                 </button>
