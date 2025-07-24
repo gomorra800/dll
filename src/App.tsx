@@ -254,6 +254,7 @@ function HomePage() {
               {/* Minhas Entregas */}
               <button
                 onClick={() => {
+                 navigate('/entregas');
                   navigate('/entregas');
                   setShowProfileDropdown(false);
                 }}
