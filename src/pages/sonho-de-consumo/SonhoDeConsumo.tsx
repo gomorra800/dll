@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { ArrowLeft, ShoppingCart, ChevronDown, ShoppingBag } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 interface SonhoDeConsumoProps {
   user: any;
@@ -19,6 +20,7 @@ const SonhoDeConsumo: React.FC<SonhoDeConsumoProps> = ({ user, userBalance, onUp
   const [showInsufficientFunds, setShowInsufficientFunds] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
   const [showProfileDropdown, setShowProfileDropdown] = useState(false);
+  const navigate = useNavigate();
 
   const raspadinhaPrice = 2.00;
 
@@ -87,7 +89,6 @@ const SonhoDeConsumo: React.FC<SonhoDeConsumoProps> = ({ user, userBalance, onUp
   };
 
   const handleLogout = () => {
-    // Implementar logout se necessário
     onBackToHome();
   };
 
@@ -181,8 +182,8 @@ const SonhoDeConsumo: React.FC<SonhoDeConsumoProps> = ({ user, userBalance, onUp
               {/* Minha Carteira */}
               <button
                 onClick={() => {
+                  navigate('/carteira');
                   setShowProfileDropdown(false);
-                  // Implementar navegação para carteira se necessário
                 }}
                 className="w-full flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-700 transition-colors text-left"
               >
@@ -201,8 +202,8 @@ const SonhoDeConsumo: React.FC<SonhoDeConsumoProps> = ({ user, userBalance, onUp
               {/* Minhas Entregas */}
               <button
                 onClick={() => {
+                  navigate('/entregas');
                   setShowProfileDropdown(false);
-                  // Implementar navegação para entregas futuramente
                 }}
                 className="w-full flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-700 transition-colors text-left"
               >

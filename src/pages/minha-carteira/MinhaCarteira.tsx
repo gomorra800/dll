@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { ArrowLeft, ShoppingCart, ChevronDown, Plus, Minus } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 interface MinhaCarteiraProps {
   user: any;
@@ -11,6 +12,7 @@ interface MinhaCarteiraProps {
 const MinhaCarteira: React.FC<MinhaCarteiraProps> = ({ user, userBalance, onUpdateBalance, onBackToHome }) => {
   const [activeTab, setActiveTab] = useState('todos');
   const [showProfileDropdown, setShowProfileDropdown] = useState(false);
+  const navigate = useNavigate();
 
   // Função para obter as iniciais do nome
   const getInitials = (name: string) => {
@@ -23,8 +25,7 @@ const MinhaCarteira: React.FC<MinhaCarteiraProps> = ({ user, userBalance, onUpda
   };
 
   const handleDepositar = () => {
-    // Navegar para página de depósito (pode ser implementado depois)
-    console.log('Navegar para depósito');
+    navigate('/deposito');
   };
 
   const handleSacar = () => {
@@ -33,8 +34,7 @@ const MinhaCarteira: React.FC<MinhaCarteiraProps> = ({ user, userBalance, onUpda
   };
 
   const handleFazerDeposito = () => {
-    // Navegar para página de depósito
-    console.log('Fazer depósito');
+    navigate('/deposito');
   };
 
   const handleSolicitarSaque = () => {
@@ -47,7 +47,6 @@ const MinhaCarteira: React.FC<MinhaCarteiraProps> = ({ user, userBalance, onUpda
   };
 
   const handleLogout = () => {
-    // Implementar logout se necessário
     onBackToHome();
   };
 
@@ -135,7 +134,6 @@ const MinhaCarteira: React.FC<MinhaCarteiraProps> = ({ user, userBalance, onUpda
               <button
                 onClick={() => {
                   setShowProfileDropdown(false);
-                  // Implementar navegação para carteira se necessário
                 }}
                 className="w-full flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-700 transition-colors text-left"
               >
@@ -154,8 +152,8 @@ const MinhaCarteira: React.FC<MinhaCarteiraProps> = ({ user, userBalance, onUpda
               {/* Minhas Entregas */}
               <button
                 onClick={() => {
+                  navigate('/entregas');
                   setShowProfileDropdown(false);
-                  // Implementar navegação para entregas futuramente
                 }}
                 className="w-full flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-700 transition-colors text-left"
               >

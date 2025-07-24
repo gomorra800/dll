@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { ArrowLeft, ShoppingCart, ChevronDown, ShoppingBag } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 interface PixNaContaProps {
   user: any;
@@ -19,6 +20,7 @@ const PixNaConta: React.FC<PixNaContaProps> = ({ user, userBalance, onUpdateBala
   const [showInsufficientFunds, setShowInsufficientFunds] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
   const [showProfileDropdown, setShowProfileDropdown] = useState(false);
+  const navigate = useNavigate();
 
   const raspadinhaPrice = 0.50;
 
@@ -82,7 +84,6 @@ const PixNaConta: React.FC<PixNaContaProps> = ({ user, userBalance, onUpdateBala
   };
 
   const handleLogout = () => {
-    // Implementar logout se necessário
     onBackToHome();
   };
 
@@ -176,8 +177,8 @@ const PixNaConta: React.FC<PixNaContaProps> = ({ user, userBalance, onUpdateBala
               {/* Minha Carteira */}
               <button
                 onClick={() => {
+                  navigate('/carteira');
                   setShowProfileDropdown(false);
-                  // Implementar navegação para carteira se necessário
                 }}
                 className="w-full flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-700 transition-colors text-left"
               >
@@ -196,8 +197,8 @@ const PixNaConta: React.FC<PixNaContaProps> = ({ user, userBalance, onUpdateBala
               {/* Minhas Entregas */}
               <button
                 onClick={() => {
+                  navigate('/entregas');
                   setShowProfileDropdown(false);
-                  // Implementar navegação para entregas futuramente
                 }}
                 className="w-full flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-700 transition-colors text-left"
               >

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { ArrowLeft, ShoppingCart, ChevronDown, Filter, Package } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 interface MinhasEntregasProps {
   user: any;
@@ -12,6 +13,7 @@ const MinhasEntregas: React.FC<MinhasEntregasProps> = ({ user, userBalance, onUp
   const [showProfileDropdown, setShowProfileDropdown] = useState(false);
   const [selectedStatus, setSelectedStatus] = useState('Todos');
   const [showStatusDropdown, setShowStatusDropdown] = useState(false);
+  const navigate = useNavigate();
 
   const statusOptions = [
     'Todos',
@@ -130,6 +132,7 @@ const MinhasEntregas: React.FC<MinhasEntregasProps> = ({ user, userBalance, onUp
               {/* Minha Carteira */}
               <button
                 onClick={() => {
+                  navigate('/carteira');
                   setShowProfileDropdown(false);
                 }}
                 className="w-full flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-700 transition-colors text-left"

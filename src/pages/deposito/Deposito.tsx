@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { ArrowLeft, ShoppingCart, ChevronDown, Shield } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 interface DepositoProps {
   user: any;
@@ -12,6 +13,7 @@ const Deposito: React.FC<DepositoProps> = ({ user, userBalance, onUpdateBalance,
   const [selectedValue, setSelectedValue] = useState<number | null>(60);
   const [customValue, setCustomValue] = useState<string>('60');
   const [showProfileDropdown, setShowProfileDropdown] = useState(false);
+  const navigate = useNavigate();
 
   const predefinedValues = [
     { value: 30, label: 'R$ 30,00' },
@@ -54,7 +56,6 @@ const Deposito: React.FC<DepositoProps> = ({ user, userBalance, onUpdateBalance,
   };
 
   const handleLogout = () => {
-    // Implementar logout se necessário
     onBackToHome();
   };
 
@@ -156,8 +157,8 @@ const Deposito: React.FC<DepositoProps> = ({ user, userBalance, onUpdateBalance,
               {/* Minha Carteira */}
               <button
                 onClick={() => {
+                  navigate('/carteira');
                   setShowProfileDropdown(false);
-                  // Implementar navegação para carteira se necessário
                 }}
                 className="w-full flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-700 transition-colors text-left"
               >
@@ -176,8 +177,8 @@ const Deposito: React.FC<DepositoProps> = ({ user, userBalance, onUpdateBalance,
               {/* Minhas Entregas */}
               <button
                 onClick={() => {
+                  navigate('/entregas');
                   setShowProfileDropdown(false);
-                  // Implementar navegação para entregas futuramente
                 }}
                 className="w-full flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-700 transition-colors text-left"
               >

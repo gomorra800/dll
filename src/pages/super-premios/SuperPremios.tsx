@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { ArrowLeft, ShoppingCart, ChevronDown, ShoppingBag } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 interface SuperPremiosProps {
   user: any;
@@ -19,6 +20,7 @@ const SuperPremios: React.FC<SuperPremiosProps> = ({ user, userBalance, onUpdate
   const [showInsufficientFunds, setShowInsufficientFunds] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
   const [showProfileDropdown, setShowProfileDropdown] = useState(false);
+  const navigate = useNavigate();
 
   const raspadinhaPrice = 5.00;
 
@@ -83,7 +85,6 @@ const SuperPremios: React.FC<SuperPremiosProps> = ({ user, userBalance, onUpdate
   };
 
   const handleLogout = () => {
-    // Implementar logout se necessário
     onBackToHome();
   };
 
@@ -177,8 +178,8 @@ const SuperPremios: React.FC<SuperPremiosProps> = ({ user, userBalance, onUpdate
               {/* Minha Carteira */}
               <button
                 onClick={() => {
+                  navigate('/carteira');
                   setShowProfileDropdown(false);
-                  // Implementar navegação para carteira se necessário
                 }}
                 className="w-full flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-700 transition-colors text-left"
               >
@@ -197,8 +198,8 @@ const SuperPremios: React.FC<SuperPremiosProps> = ({ user, userBalance, onUpdate
               {/* Minhas Entregas */}
               <button
                 onClick={() => {
+                  navigate('/entregas');
                   setShowProfileDropdown(false);
-                  // Implementar navegação para entregas futuramente
                 }}
                 className="w-full flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-700 transition-colors text-left"
               >
