@@ -190,7 +190,7 @@ const MinhasEntregas: React.FC<MinhasEntregasProps> = ({ user, userBalance, onUp
         <div className="max-w-7xl mx-auto">
           {/* Page Title */}
           <div className="mb-8">
-            <h1 className="text-white text-2xl font-bold mb-2">Minhas Entregas</h1>
+            <h1 className="text-white text-3xl font-bold mb-2">Minhas Entregas</h1>
             <p className="text-gray-400 text-base">Acompanhe o status das suas solicitações de entrega</p>
           </div>
 
@@ -201,12 +201,12 @@ const MinhasEntregas: React.FC<MinhasEntregasProps> = ({ user, userBalance, onUp
               <span className="text-white font-medium text-lg">Filtrar por Status</span>
             </div>
 
-            <div className="flex items-center space-x-4">
+            <div className="flex items-center justify-between">
               {/* Status Dropdown - Mais largo */}
               <div className="relative">
                 <button
                   onClick={() => setShowStatusDropdown(!showStatusDropdown)}
-                  className="flex items-center justify-between flex-1 w-full px-6 py-4 text-white rounded-lg border border-gray-600 hover:border-gray-500 focus:outline-none text-base"
+                  className="flex items-center justify-between w-80 px-6 py-4 text-white rounded-lg border border-gray-600 hover:border-gray-500 focus:outline-none text-base"
                   style={{ backgroundColor: '#111219' }}
                 >
                   <span>{selectedStatus}</span>
@@ -223,7 +223,7 @@ const MinhasEntregas: React.FC<MinhasEntregasProps> = ({ user, userBalance, onUp
                     />
                     
                     {/* Dropdown Content */}
-                    <div className="absolute top-full left-0 w-full mt-1 rounded-lg border border-gray-600 shadow-lg z-40" style={{ backgroundColor: '#111219' }}>
+                    <div className="absolute top-full left-0 w-80 mt-1 rounded-lg border border-gray-600 shadow-lg z-40" style={{ backgroundColor: '#111219' }}>
                       {statusOptions.map((status) => (
                         <button
                           key={status}
@@ -246,14 +246,14 @@ const MinhasEntregas: React.FC<MinhasEntregasProps> = ({ user, userBalance, onUp
               {/* Buttons */}
               <div className="flex items-center space-x-4">
                 {/* Filter Button */}
-                <button className="bg-green-500 hover:bg-green-600 text-black px-4 py-2 rounded-lg font-medium text-sm">
+                <button className="bg-green-500 hover:bg-green-600 text-white px-8 py-4 rounded-lg font-medium text-base">
                   Filtrar
                 </button>
 
                 {/* Limpar Button */}
                 <button 
                   onClick={handleLimpar}
-                  className="text-black hover:text-gray-800 px-4 py-2 font-medium text-sm"
+                  className="text-gray-400 hover:text-white px-6 py-4 font-medium text-base"
                 >
                   Limpar
                 </button>
