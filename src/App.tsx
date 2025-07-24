@@ -171,7 +171,7 @@ function HomePage() {
                 </button>
                 
                 {/* Perfil do usuário */}
-                <div className="flex items-center space-x-3">
+                <div className="relative flex items-center space-x-3">
                   <div className="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center text-white font-bold text-sm">
                     {getInitials(user?.name)}
                   </div>
@@ -187,69 +187,6 @@ function HomePage() {
                   <button onClick={handleProfileClick}>
                     <ChevronDown className={`w-4 h-4 text-gray-400 transition-transform duration-200 ${showProfileDropdown ? 'rotate-180' : ''}`} />
                   </button>
-                  
-                  {/* Profile Dropdown */}
-                  {showProfileDropdown && (
-                    <div className="absolute top-full right-0 mt-2 w-64 rounded-lg shadow-lg z-50 transition-all duration-200 ease-out" style={{ backgroundColor: '#111219' }}>
-                      <div className="p-2">
-                        {/* Minha Carteira */}
-                        <button
-                          onClick={() => {
-                            navigate('/carteira');
-                            setShowProfileDropdown(false);
-                          }}
-                          className="w-full flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-700 transition-colors text-left"
-                        >
-                          <div className="w-8 h-8 bg-blue-500 rounded-lg flex items-center justify-center">
-                            <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
-                              <path d="M4 4a2 2 0 00-2 2v1h16V6a2 2 0 00-2-2H4z"/>
-                              <path fillRule="evenodd" d="M18 9H2v5a2 2 0 002 2h12a2 2 0 002-2V9zM4 13a1 1 0 011-1h1a1 1 0 110 2H5a1 1 0 01-1-1zm5-1a1 1 0 100 2h1a1 1 0 100-2H9z" clipRule="evenodd"/>
-                            </svg>
-                          </div>
-                          <div className="flex-1">
-                            <div className="text-white font-medium text-sm">Minha Carteira</div>
-                            <div className="text-gray-400 text-xs">Visualizar saldos e histórico</div>
-                          </div>
-                        </button>
-                        
-                        {/* Minhas Entregas */}
-                        <button
-                          onClick={() => {
-                            setShowProfileDropdown(false);
-                            // Implementar navegação para entregas futuramente
-                          }}
-                          className="w-full flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-700 transition-colors text-left"
-                        >
-                          <div className="w-8 h-8 bg-orange-500 rounded-lg flex items-center justify-center">
-                            <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
-                              <path d="M8 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM15 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z"/>
-                              <path d="M3 4a1 1 0 00-1 1v10a1 1 0 001 1h1.05a2.5 2.5 0 014.9 0H10a1 1 0 001-1V5a1 1 0 00-1-1H3zM14 7a1 1 0 00-1 1v6.05A2.5 2.5 0 0115.95 16H17a1 1 0 001-1V8a1 1 0 00-1-1h-3z"/>
-                            </svg>
-                          </div>
-                          <div className="flex-1">
-                            <div className="text-white font-medium text-sm">Minhas Entregas</div>
-                            <div className="text-gray-400 text-xs">Acompanhar status das entregas</div>
-                          </div>
-                        </button>
-                        
-                        {/* Sair da Conta */}
-                        <button
-                          onClick={handleLogout}
-                          className="w-full flex items-center space-x-3 p-3 rounded-lg hover:bg-red-600 transition-colors text-left"
-                        >
-                          <div className="w-8 h-8 bg-red-500 rounded-lg flex items-center justify-center">
-                            <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
-                              <path fillRule="evenodd" d="M3 3a1 1 0 00-1 1v12a1 1 0 102 0V4a1 1 0 00-1-1zm10.293 9.293a1 1 0 001.414 1.414l3-3a1 1 0 000-1.414l-3-3a1 1 0 10-1.414 1.414L14.586 9H7a1 1 0 100 2h7.586l-1.293 1.293z" clipRule="evenodd"/>
-                            </svg>
-                          </div>
-                          <div className="flex-1">
-                            <div className="text-white font-medium text-sm">Sair da Conta</div>
-                            <div className="text-gray-400 text-xs">Encerrar sessão atual</div>
-                          </div>
-                        </button>
-                      </div>
-                    </div>
-                  )}
                 </div>
               </div>
             ) : (
@@ -281,12 +218,76 @@ function HomePage() {
         </div>
       </header>
 
-      {/* Overlay para fechar dropdown */}
+      {/* Profile Dropdown */}
       {showProfileDropdown && (
-        <div 
-          className="fixed inset-0 z-40" 
-          onClick={() => setShowProfileDropdown(false)}
-        />
+        <>
+          {/* Overlay para fechar dropdown */}
+          <div 
+            className="fixed inset-0 z-40" 
+            onClick={() => setShowProfileDropdown(false)}
+          />
+          
+          {/* Dropdown Menu */}
+          <div className="fixed top-20 right-6 w-64 rounded-lg shadow-lg z-50 transition-all duration-200 ease-out" style={{ backgroundColor: '#111219' }}>
+            <div className="p-2">
+              {/* Minha Carteira */}
+              <button
+                onClick={() => {
+                  navigate('/carteira');
+                  setShowProfileDropdown(false);
+                }}
+                className="w-full flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-700 transition-colors text-left"
+              >
+                <div className="w-8 h-8 bg-blue-500 rounded-lg flex items-center justify-center">
+                  <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M4 4a2 2 0 00-2 2v1h16V6a2 2 0 00-2-2H4z"/>
+                    <path fillRule="evenodd" d="M18 9H2v5a2 2 0 002 2h12a2 2 0 002-2V9zM4 13a1 1 0 011-1h1a1 1 0 110 2H5a1 1 0 01-1-1zm5-1a1 1 0 100 2h1a1 1 0 100-2H9z" clipRule="evenodd"/>
+                  </svg>
+                </div>
+                <div className="flex-1">
+                  <div className="text-white font-medium text-sm">Minha Carteira</div>
+                  <div className="text-gray-400 text-xs">Visualizar saldos e histórico</div>
+                </div>
+              </button>
+              
+              {/* Minhas Entregas */}
+              <button
+                onClick={() => {
+                  setShowProfileDropdown(false);
+                  // Implementar navegação para entregas futuramente
+                }}
+                className="w-full flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-700 transition-colors text-left"
+              >
+                <div className="w-8 h-8 bg-orange-500 rounded-lg flex items-center justify-center">
+                  <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M8 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM15 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z"/>
+                    <path d="M3 4a1 1 0 00-1 1v10a1 1 0 001 1h1.05a2.5 2.5 0 014.9 0H10a1 1 0 001-1V5a1 1 0 00-1-1H3zM14 7a1 1 0 00-1 1v6.05A2.5 2.5 0 0115.95 16H17a1 1 0 001-1V8a1 1 0 00-1-1h-3z"/>
+                  </svg>
+                </div>
+                <div className="flex-1">
+                  <div className="text-white font-medium text-sm">Minhas Entregas</div>
+                  <div className="text-gray-400 text-xs">Acompanhar status das entregas</div>
+                </div>
+              </button>
+              
+              {/* Sair da Conta */}
+              <button
+                onClick={handleLogout}
+                className="w-full flex items-center space-x-3 p-3 rounded-lg hover:bg-red-600 transition-colors text-left"
+              >
+                <div className="w-8 h-8 bg-red-500 rounded-lg flex items-center justify-center">
+                  <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M3 3a1 1 0 00-1 1v12a1 1 0 102 0V4a1 1 0 00-1-1zm10.293 9.293a1 1 0 001.414 1.414l3-3a1 1 0 000-1.414l-3-3a1 1 0 10-1.414 1.414L14.586 9H7a1 1 0 100 2h7.586l-1.293 1.293z" clipRule="evenodd"/>
+                  </svg>
+                </div>
+                <div className="flex-1">
+                  <div className="text-white font-medium text-sm">Sair da Conta</div>
+                  <div className="text-gray-400 text-xs">Encerrar sessão atual</div>
+                </div>
+              </button>
+            </div>
+          </div>
+        </>
       )}
 
       {/* Main Banner Area */}
