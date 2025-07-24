@@ -8,6 +8,7 @@ import SonhoDeConsumo from './pages/sonho-de-consumo/SonhoDeConsumo';
 import MeMimei from './pages/me-mimei/MeMimei';
 import SuperPremios from './pages/super-premios/SuperPremios';
 import MinhaCarteira from './pages/minha-carteira/MinhaCarteira';
+import MinhasEntregas from './pages/minhas-entregas/MinhasEntregas';
 
 function HomePage() {
   const navigate = useNavigate();
@@ -253,8 +254,8 @@ function HomePage() {
               {/* Minhas Entregas */}
               <button
                 onClick={() => {
+                  navigate('/entregas');
                   setShowProfileDropdown(false);
-                  // Implementar navegação para entregas futuramente
                 }}
                 className="w-full flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-700 transition-colors text-left"
               >
@@ -924,6 +925,29 @@ function MinhaCarteiraPage() {
   );
 }
 
+function MinhasEntregasPage() {
+  const navigate = useNavigate();
+  const [user] = React.useState({ name: 'João Pessoa' }); // Simulando usuário logado
+  const [userBalance, setUserBalance] = React.useState(0.00);
+
+  const handleUpdateBalance = (newBalance: number) => {
+    setUserBalance(newBalance);
+  };
+
+  const handleBackToHome = () => {
+    navigate('/');
+  };
+
+  return (
+    <MinhasEntregas 
+      user={user}
+      userBalance={userBalance}
+      onUpdateBalance={handleUpdateBalance}
+      onBackToHome={handleBackToHome}
+    />
+  );
+}
+
 function App() {
   return (
     <Router>
@@ -931,6 +955,7 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/deposito" element={<DepositoPage />} />
         <Route path="/carteira" element={<MinhaCarteiraPage />} />
+        <Route path="/entregas" element={<MinhasEntregasPage />} />
         <Route path="/raspadinha1/" element={<PixNaContaPage />} />
         <Route path="/raspadinha2/" element={<SonhoDeConsumoPage />} />
         <Route path="/raspadinha3/" element={<MeMimeiPage />} />
