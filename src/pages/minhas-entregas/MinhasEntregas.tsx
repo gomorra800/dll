@@ -206,7 +206,7 @@ const MinhasEntregas: React.FC<MinhasEntregasProps> = ({ user, userBalance, onUp
               <div className="relative flex-1 mr-6">
                 <button
                   onClick={() => setShowStatusDropdown(!showStatusDropdown)}
-                  className="flex items-center justify-between w-full px-6 py-4 text-white rounded-lg border border-gray-600 hover:border-gray-500 focus:outline-none text-base"
+                  className="flex items-center justify-between w-full px-6 py-2 text-white rounded-lg border border-gray-600 hover:border-gray-500 focus:outline-none text-base"
                   style={{ backgroundColor: '#111219' }}
                 >
                   <span>{selectedStatus}</span>
