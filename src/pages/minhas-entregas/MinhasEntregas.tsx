@@ -187,28 +187,30 @@ const MinhasEntregas: React.FC<MinhasEntregasProps> = ({ user, userBalance, onUp
 
       {/* Main Content */}
       <div className="px-6 py-8">
-        <div className="max-w-6xl mx-auto">
+        <div className="max-w-7xl mx-auto">
           {/* Page Title */}
-          <h1 className="text-white text-2xl font-bold mb-2">Minhas Entregas</h1>
-          <p className="text-gray-400 text-sm mb-8">Acompanhe o status das suas solicitações de entrega</p>
+          <div className="mb-8">
+            <h1 className="text-white text-3xl font-bold mb-2">Minhas Entregas</h1>
+            <p className="text-gray-400 text-base">Acompanhe o status das suas solicitações de entrega</p>
+          </div>
 
           {/* Filter Section */}
-          <div className="mb-8">
-            <div className="flex items-center space-x-2 mb-4">
-              <Filter className="w-4 h-4 text-gray-400" />
-              <span className="text-white font-medium">Filtrar por Status</span>
+          <div className="mb-12">
+            <div className="flex items-center space-x-3 mb-6">
+              <Filter className="w-5 h-5 text-white" />
+              <span className="text-white font-medium text-lg">Filtrar por Status</span>
             </div>
 
-            <div className="flex items-center space-x-4">
-              {/* Status Dropdown */}
+            <div className="flex items-center justify-between">
+              {/* Status Dropdown - Mais largo */}
               <div className="relative">
                 <button
                   onClick={() => setShowStatusDropdown(!showStatusDropdown)}
-                  className="flex items-center justify-between w-48 px-4 py-2 text-white rounded-lg border border-gray-600 hover:border-gray-500 focus:outline-none"
+                  className="flex items-center justify-between w-80 px-6 py-4 text-white rounded-lg border border-gray-600 hover:border-gray-500 focus:outline-none text-base"
                   style={{ backgroundColor: '#111219' }}
                 >
                   <span>{selectedStatus}</span>
-                  <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${showStatusDropdown ? 'rotate-180' : ''}`} />
+                  <ChevronDown className={`w-5 h-5 transition-transform duration-200 ${showStatusDropdown ? 'rotate-180' : ''}`} />
                 </button>
 
                 {/* Dropdown Menu */}
@@ -221,12 +223,12 @@ const MinhasEntregas: React.FC<MinhasEntregasProps> = ({ user, userBalance, onUp
                     />
                     
                     {/* Dropdown Content */}
-                    <div className="absolute top-full left-0 w-48 mt-1 rounded-lg border border-gray-600 shadow-lg z-40" style={{ backgroundColor: '#111219' }}>
+                    <div className="absolute top-full left-0 w-80 mt-1 rounded-lg border border-gray-600 shadow-lg z-40" style={{ backgroundColor: '#111219' }}>
                       {statusOptions.map((status) => (
                         <button
                           key={status}
                           onClick={() => handleStatusSelect(status)}
-                          className={`w-full px-4 py-2 text-left hover:bg-gray-700 transition-colors first:rounded-t-lg last:rounded-b-lg ${
+                          className={`w-full px-6 py-3 text-left hover:bg-gray-700 transition-colors first:rounded-t-lg last:rounded-b-lg text-base ${
                             selectedStatus === status ? 'text-green-400' : 'text-white'
                           }`}
                         >
@@ -241,28 +243,31 @@ const MinhasEntregas: React.FC<MinhasEntregasProps> = ({ user, userBalance, onUp
                 )}
               </div>
 
-              {/* Filter Button */}
-              <button className="bg-green-500 hover:bg-green-600 text-white px-6 py-2 rounded-lg font-medium">
-                Filtrar
-              </button>
+              {/* Buttons */}
+              <div className="flex items-center space-x-4">
+                {/* Filter Button */}
+                <button className="bg-green-500 hover:bg-green-600 text-white px-8 py-4 rounded-lg font-medium text-base">
+                  Filtrar
+                </button>
 
-              {/* Limpar Button */}
-              <button 
-                onClick={handleLimpar}
-                className="text-gray-400 hover:text-white px-4 py-2 font-medium"
-              >
-                Limpar
-              </button>
+                {/* Limpar Button */}
+                <button 
+                  onClick={handleLimpar}
+                  className="text-gray-400 hover:text-white px-6 py-4 font-medium text-base"
+                >
+                  Limpar
+                </button>
+              </div>
             </div>
           </div>
 
           {/* Empty State */}
-          <div className="text-center py-24">
-            <div className="w-24 h-24 mx-auto mb-6 rounded-full flex items-center justify-center" style={{ backgroundColor: '#1a1d24' }}>
-              <Package className="w-12 h-12 text-gray-400" />
+          <div className="text-center py-32">
+            <div className="w-32 h-32 mx-auto mb-8 rounded-full flex items-center justify-center" style={{ backgroundColor: '#1a1d24' }}>
+              <Package className="w-16 h-16 text-gray-400" />
             </div>
-            <h2 className="text-white text-xl font-bold mb-2">Nenhuma entrega encontrada</h2>
-            <p className="text-gray-400 mb-6">
+            <h2 className="text-white text-2xl font-bold mb-4">Nenhuma entrega encontrada</h2>
+            <p className="text-gray-400 text-lg max-w-2xl mx-auto">
               Você ainda não possui solicitações de entrega. Ganhe prêmios nas raspadinhas para solicitar entregas!
             </p>
           </div>
