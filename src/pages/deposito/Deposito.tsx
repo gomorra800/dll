@@ -43,7 +43,7 @@ const Deposito: React.FC<DepositoProps> = ({ user, userBalance, onUpdateBalance,
   const handleGeneratePix = () => {
     if (selectedValue && selectedValue >= 30) {
       // Redirecionar para página de pagamento
-      navigate('/pagamento');
+      navigate('/pagamento', { state: { depositValue: selectedValue } });
     } else {
       alert('Valor mínimo para depósito é R$ 30,00');
     }

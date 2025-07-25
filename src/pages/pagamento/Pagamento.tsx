@@ -1,19 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import { ArrowLeft, ShoppingCart, ChevronDown, Shield, Copy, Clock } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 interface PagamentoProps {
   user: any;
   userBalance: number;
   onUpdateBalance: (newBalance: number) => void;
   onBackToHome: () => void;
-  depositValue?: number;
 }
 
-const Pagamento: React.FC<PagamentoProps> = ({ user, userBalance, onUpdateBalance, onBackToHome, depositValue = 60 }) => {
+const Pagamento: React.FC<PagamentoProps> = ({ user, userBalance, onUpdateBalance, onBackToHome }) => {
   const [showProfileDropdown, setShowProfileDropdown] = useState(false);
   const [timeLeft, setTimeLeft] = useState(553); // 09:13 em segundos
   const navigate = useNavigate();
+  const location = useLocation();
+  
+  // Pegar o valor do depósito do state da navegação, ou usar 60 como padrão
+  const depositValue = location.state?.depositValue || 60;
 
   // Função para obter as iniciais do nome
   const getInitials = (name: string) => {
