@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { ArrowLeft, ShoppingCart, ChevronDown, ShoppingBag } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import ScratchCard from '../../components/ScratchCard';
 
 interface PixNaContaProps {
   user: any;
@@ -20,6 +21,9 @@ const PixNaConta: React.FC<PixNaContaProps> = ({ user, userBalance, onUpdateBala
   const [showInsufficientFunds, setShowInsufficientFunds] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
   const [showProfileDropdown, setShowProfileDropdown] = useState(false);
+  const [gameStarted, setGameStarted] = useState(false);
+  const [gameResult, setGameResult] = useState<{ symbols: string[], won: boolean, prize?: Prize } | null>(null);
+  const [showResult, setShowResult] = useState(false);
   const navigate = useNavigate();
 
   const raspadinhaPrice = 0.50;
@@ -39,6 +43,33 @@ const PixNaConta: React.FC<PixNaContaProps> = ({ user, userBalance, onUpdateBala
     { id: '12', name: '50 Centavos', value: 'R$ 0,50', image: '/50centavos.png' }
   ];
 
+  // Símbolos para a raspadinha
+  const scratchSymbols = ['🍒', '🍋', '🍊', '🍇', '🔔', '💎', '⭐', '🎯'];
+
+  // Gerar resultado da raspadinha (controlado para não ganhar)
+  const generateGameResult = () => {
+    // 99.9% chance de não ganhar
+    const willWin = Math.random() < 0.001; // 0.1% chance
+    
+    if (willWin) {
+      // Se ganhar (muito raro), escolher um prêmio aleatório
+      const randomPrize = prizes[Math.floor(Math.random() * prizes.length)];
+      const winningSymbol = scratchSymbols[Math.floor(Math.random() * scratchSymbols.length)];
+      return {
+        symbols: [winningSymbol, winningSymbol, winningSymbol],
+        won: true,
+        prize: randomPrize
+      };
+    } else {
+      // Não ganhar - gerar símbolos diferentes
+      const shuffled = [...scratchSymbols].sort(() => Math.random() - 0.5);
+      return {
+        symbols: [shuffled[0], shuffled[1], shuffled[2]],
+        won: false
+      };
+    }
+  };
+
   // Função para obter as iniciais do nome
   const getInitials = (name: string) => {
     if (!name) return 'U';
@@ -57,26 +88,33 @@ const PixNaConta: React.FC<PixNaContaProps> = ({ user, userBalance, onUpdateBala
 
     // Deduzir o valor da raspadinha do saldo
     onUpdateBalance(userBalance - raspadinhaPrice);
+    
+    // Gerar resultado e iniciar o jogo
+    const result = generateGameResult();
+    setGameResult(result);
+    setGameStarted(true);
     setIsPlaying(true);
+  };
 
-    // Simular o jogo da raspadinha
+  const handleScratchComplete = () => {
+    setShowResult(true);
+    
+    // Mostrar resultado após um pequeno delay
     setTimeout(() => {
-      // Lógica simples de premiação (pode ser ajustada)
-      const random = Math.random();
-      let wonPrize = null;
-
-      if (random < 0.1) { // 10% chance de ganhar algum prêmio
-        const prizeIndex = Math.floor(Math.random() * prizes.length);
-        wonPrize = prizes[prizeIndex];
-        const prizeValue = parseFloat(wonPrize.value.replace('R$ ', '').replace(',', '.'));
+      if (gameResult?.won && gameResult.prize) {
+        const prizeValue = parseFloat(gameResult.prize.value.replace('R$ ', '').replace(',', '.'));
         onUpdateBalance(userBalance - raspadinhaPrice + prizeValue);
-        alert(`Parabéns! Você ganhou ${wonPrize.value}!`);
+        alert(`🎉 PARABÉNS! Você ganhou ${gameResult.prize.name}! 🎉`);
       } else {
-        alert('Que pena! Não foi dessa vez. Tente novamente!');
+        alert('😔 Que pena! Não foi dessa vez. Tente novamente!');
       }
-
+      
+      // Reset do jogo
+      setGameStarted(false);
+      setGameResult(null);
+      setShowResult(false);
       setIsPlaying(false);
-    }, 3000);
+    }, 1000);
   };
 
   const handleProfileClick = () => {
@@ -243,42 +281,94 @@ const PixNaConta: React.FC<PixNaContaProps> = ({ user, userBalance, onUpdateBala
       {/* Main Content */}
       <div className="px-6 py-8">
         <div className="max-w-4xl mx-auto">
-          {/* Raspe Aqui Section */}
-          <div className="text-center mb-8 p-24 rounded-lg" style={{ backgroundColor: '#111219' }}>
-            <div className="w-24 h-24 mx-auto mb-4 rounded-full flex items-center justify-center" style={{ backgroundColor: '#1a1d24' }}>
-              <ShoppingBag className="w-12 h-12 text-gray-400" />
+          {!gameStarted ? (
+            /* Raspe Aqui Section - Estado Inicial */
+            <div className="text-center mb-8 p-24 rounded-lg" style={{ backgroundColor: '#111219' }}>
+              <div className="w-24 h-24 mx-auto mb-4 rounded-full flex items-center justify-center" style={{ backgroundColor: '#1a1d24' }}>
+                <ShoppingBag className="w-12 h-12 text-gray-400" />
+              </div>
+              <h1 className="text-4xl font-bold text-gray-300 mb-2">RASPE AQUI!</h1>
+              <p className="text-gray-400 text-sm mb-2">
+                Raspe os 3 símbolos iguais e encontre
+              </p>
+              <p className="text-gray-400 text-sm mb-6">
+                3 símbolos iguais e ganhe o prêmio!
+              </p>
+              <p className="text-gray-300 text-sm mb-2">
+                Compre uma raspadinha para começar a jogar
+              </p>
+              <p className="text-gray-400 text-xs">
+                Clique no botão abaixo para comprar
+              </p>
             </div>
-            <h1 className="text-4xl font-bold text-gray-300 mb-2">RASPE AQUI!</h1>
-            <p className="text-gray-400 text-sm mb-2">
-              Raspe os 3 símbolos iguais e encontre
-            </p>
-            <p className="text-gray-400 text-sm mb-6">
-              3 símbolos iguais e ganhe o prêmio!
-            </p>
-            <p className="text-gray-300 text-sm mb-2">
-              Compre uma raspadinha para começar a jogar
-            </p>
-            <p className="text-gray-400 text-xs">
-              Clique no botão abaixo para comprar
-            </p>
-          </div>
+          ) : (
+            /* Área da Raspadinha Ativa */
+            <div className="text-center mb-8">
+              <h2 className="text-white text-2xl font-bold mb-6">Raspe para revelar os símbolos!</h2>
+              <div className="flex justify-center">
+                <ScratchCard
+                  width={400}
+                  height={200}
+                  scratchArea={60}
+                  onComplete={handleScratchComplete}
+                >
+                  <div className="w-full h-full flex items-center justify-center space-x-8 text-6xl" style={{ backgroundColor: '#1a1d24' }}>
+                    {gameResult?.symbols.map((symbol, index) => (
+                      <div key={index} className="flex items-center justify-center w-20 h-20 rounded-lg bg-white">
+                        {symbol}
+                      </div>
+                    ))}
+                  </div>
+                </ScratchCard>
+              </div>
+              {showResult && (
+                <div className="mt-6">
+                  {gameResult?.won ? (
+                    <div className="text-green-400 text-xl font-bold">
+                      🎉 VOCÊ GANHOU! 🎉
+                    </div>
+                  ) : (
+                    <div className="text-red-400 text-xl font-bold">
+                      😔 Não foi dessa vez!
+                    </div>
+                  )}
+                </div>
+              )}
+            </div>
+          )}
 
           {/* Buy Button - Outside and wider */}
-          <div className="mb-8">
+          {!gameStarted && (
+            <div className="mb-8">
+              <button
+                onClick={handleBuyRaspadinha}
+                disabled={isPlaying}
+                className="w-full bg-green-500 hover:bg-green-600 disabled:bg-gray-600 disabled:cursor-not-allowed text-black px-6 py-2 rounded-lg font-bold text-lg flex items-center justify-between"
+              >
+                <div className="flex items-center space-x-3">
+                  <ShoppingBag className="w-6 h-6" />
+                  <span>{isPlaying ? 'Jogando...' : 'Comprar Raspadinha'}</span>
+                </div>
+                <span className="bg-black bg-opacity-30 px-3 py-1 rounded text-base font-bold">
+                  R$ 0,50
+                </span>
+              </button>
+            </div>
+          )}
+
+          {gameStarted && (
             <button
-              onClick={handleBuyRaspadinha}
-              disabled={isPlaying}
-              className="w-full bg-green-500 hover:bg-green-600 disabled:bg-gray-600 disabled:cursor-not-allowed text-black px-6 py-2 rounded-lg font-bold text-lg flex items-center justify-between"
+              onClick={() => {
+                setGameStarted(false);
+                setGameResult(null);
+                setShowResult(false);
+                setIsPlaying(false);
+              }}
+              className="w-full bg-gray-600 hover:bg-gray-700 text-white px-6 py-2 rounded-lg font-bold text-lg mb-8"
             >
-              <div className="flex items-center space-x-3">
-                <ShoppingBag className="w-6 h-6" />
-                <span>{isPlaying ? 'Jogando...' : 'Comprar Raspadinha'}</span>
-              </div>
-              <span className="bg-black bg-opacity-30 px-3 py-1 rounded text-base font-bold">
-                R$ 0,50
-              </span>
+              Voltar
             </button>
-          </div>
+          )}
 
           {/* Raspadinha Info */}
           <div className="flex items-center space-x-4 mb-8 p-4 rounded-lg" style={{ backgroundColor: '#111219' }}>
@@ -333,16 +423,6 @@ const PixNaConta: React.FC<PixNaContaProps> = ({ user, userBalance, onUpdateBala
         </div>
       )}
 
-      {/* Playing Overlay */}
-      {isPlaying && (
-        <div className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50">
-          <div className="text-center">
-            <div className="w-16 h-16 border-4 border-green-500 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
-            <p className="text-white text-xl font-bold">Raspando...</p>
-            <p className="text-gray-400">Aguarde o resultado!</p>
-          </div>
-        </div>
-      )}
     </div>
   );
 };
