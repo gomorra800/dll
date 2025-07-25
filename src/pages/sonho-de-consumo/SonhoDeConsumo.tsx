@@ -141,7 +141,10 @@ const SonhoDeConsumo: React.FC<SonhoDeConsumoProps> = ({ user, userBalance, onUp
             </button>
             
             {/* Carrinho */}
-            <button className="text-gray-300 hover:text-white">
+            <button 
+              onClick={() => navigate('/carrinho')}
+              className="text-gray-300 hover:text-white"
+            >
               <ShoppingCart className="w-6 h-6" />
             </button>
             

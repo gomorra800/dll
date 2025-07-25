@@ -90,7 +90,10 @@ const MinhaCarteira: React.FC<MinhaCarteiraProps> = ({ user, userBalance, onUpda
             </button>
             
             {/* Carrinho */}
-            <button className="text-gray-300 hover:text-white">
+            <button 
+              onClick={() => navigate('/carrinho')}
+              className="text-gray-300 hover:text-white"
+            >
               <ShoppingCart className="w-6 h-6" />
             </button>
             

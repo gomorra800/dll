@@ -137,7 +137,10 @@ const SuperPremios: React.FC<SuperPremiosProps> = ({ user, userBalance, onUpdate
             </button>
             
             {/* Carrinho */}
-            <button className="text-gray-300 hover:text-white">
+            <button 
+              onClick={() => navigate('/carrinho')}
+              className="text-gray-300 hover:text-white"
+            >
               <ShoppingCart className="w-6 h-6" />
             </button>
             

@@ -9,6 +9,7 @@ import MeMimei from './pages/me-mimei/MeMimei';
 import SuperPremios from './pages/super-premios/SuperPremios';
 import MinhaCarteira from './pages/minha-carteira/MinhaCarteira';
 import MinhasEntregas from './pages/minhas-entregas/MinhasEntregas';
+import Carrinho from './pages/carrinho/Carrinho';
 import Saque from './pages/saque/Saque';
 import Pagamento from './pages/pagamento/Pagamento';
 
@@ -169,7 +170,10 @@ function HomePage() {
                 </button>
                 
                 {/* Carrinho */}
-                <button className="text-gray-300 hover:text-white">
+                <button 
+                  onClick={() => navigate('/carrinho')}
+                  className="text-gray-300 hover:text-white"
+                >
                   <ShoppingCart className="w-6 h-6" />
                 </button>
                 
@@ -905,6 +909,29 @@ function SuperPremiosPage() {
   );
 }
 
+function CarrinhoPage() {
+  const navigate = useNavigate();
+  const [user] = React.useState({ name: 'João Pessoa' }); // Simulando usuário logado
+  const [userBalance, setUserBalance] = React.useState(0.00);
+
+  const handleUpdateBalance = (newBalance: number) => {
+    setUserBalance(newBalance);
+  };
+
+  const handleBackToHome = () => {
+    navigate('/');
+  };
+
+  return (
+    <Carrinho 
+      user={user}
+      userBalance={userBalance}
+      onUpdateBalance={handleUpdateBalance}
+      onBackToHome={handleBackToHome}
+    />
+  );
+}
+
 function MinhaCarteiraPage() {
   const navigate = useNavigate();
   const [user] = React.useState({ name: 'João Pessoa' }); // Simulando usuário logado
@@ -1011,6 +1038,7 @@ function App() {
         <Route path="/raspadinha2/" element={<SonhoDeConsumoPage />} />
         <Route path="/raspadinha3/" element={<MeMimeiPage />} />
         <Route path="/raspadinha4/" element={<SuperPremiosPage />} />
+        <Route path="/carrinho/" element={<CarrinhoPage />} />
       </Routes>
     </Router>
   );
