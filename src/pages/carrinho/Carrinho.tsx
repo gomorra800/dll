@@ -186,7 +186,7 @@ const Carrinho: React.FC<CarrinhoProps> = ({ user, userBalance, onUpdateBalance,
             <div className="w-32 h-32 mx-auto mb-8 rounded-full flex items-center justify-center" style={{ backgroundColor: '#1a1d24' }}>
               <ShoppingCart className="w-12 h-12 text-gray-400" />
             </div>
-            <h2 className="text-white text-2xl font-bold mb-4">Carrinho Vazio</h2>
+            <h2 className="text-white text-xl font-semibold mb-2">Carrinho Vazio</h2>
             <p className="text-gray-400 text-sm mb-6 max-w-sm mx-auto">
               Você ainda não possui prêmios ganhos.
             </p>
