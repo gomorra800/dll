@@ -192,7 +192,7 @@ const Carrinho: React.FC<CarrinhoProps> = ({ user, userBalance, onUpdateBalance,
             </p>
             <button
               onClick={handleJogarRaspadinhas}
-              className="bg-green-500 hover:bg-green-600 text-white px-8 py-3 rounded-lg font-bold text-lg"
+              className="bg-green-500 hover:bg-green-600 text-white px-6 py-2 rounded-md font-semibold text-base"
             >
               Jogar Raspadinhas
             </button>
