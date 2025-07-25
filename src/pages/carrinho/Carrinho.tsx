@@ -182,7 +182,7 @@ const Carrinho: React.FC<CarrinhoProps> = ({ user, userBalance, onUpdateBalance,
           </div>
 
           {/* Empty State */}
-          <div className="text-center py-32">
+          <div className="text-center py-16">
             <div className="w-32 h-32 mx-auto mb-8 rounded-full flex items-center justify-center" style={{ backgroundColor: '#1a1d24' }}>
               <ShoppingCart className="w-16 h-16 text-gray-400" />
             </div>
