@@ -187,7 +187,7 @@ const Carrinho: React.FC<CarrinhoProps> = ({ user, userBalance, onUpdateBalance,
               <ShoppingCart className="w-16 h-16 text-gray-400" />
             </div>
             <h2 className="text-white text-2xl font-bold mb-4">Carrinho Vazio</h2>
-            <p className="text-gray-400 text-lg mb-8 max-w-md mx-auto">
+            <p className="text-gray-400 text-sm mb-6 max-w-sm mx-auto">
               Você ainda não possui prêmios ganhos.
             </p>
             <button
