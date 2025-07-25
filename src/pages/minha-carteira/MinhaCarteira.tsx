@@ -29,8 +29,7 @@ const MinhaCarteira: React.FC<MinhaCarteiraProps> = ({ user, userBalance, onUpda
   };
 
   const handleSacar = () => {
-    // Implementar lógica de saque
-    console.log('Implementar saque');
+    navigate('/saque');
   };
 
   const handleFazerDeposito = () => {
@@ -38,8 +37,7 @@ const MinhaCarteira: React.FC<MinhaCarteiraProps> = ({ user, userBalance, onUpda
   };
 
   const handleSolicitarSaque = () => {
-    // Implementar solicitação de saque
-    console.log('Solicitar saque');
+    navigate('/saque');
   };
 
   const handleProfileClick = () => {
