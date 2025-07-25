@@ -10,6 +10,7 @@ import SuperPremios from './pages/super-premios/SuperPremios';
 import MinhaCarteira from './pages/minha-carteira/MinhaCarteira';
 import MinhasEntregas from './pages/minhas-entregas/MinhasEntregas';
 import Saque from './pages/saque/Saque';
+import Pagamento from './pages/pagamento/Pagamento';
 
 function HomePage() {
   const navigate = useNavigate();
@@ -973,12 +974,36 @@ function SaquePage() {
   );
 }
 
+function PagamentoPage() {
+  const navigate = useNavigate();
+  const [user] = React.useState({ name: 'João Pessoa' }); // Simulando usuário logado
+  const [userBalance, setUserBalance] = React.useState(0.00);
+
+  const handleUpdateBalance = (newBalance: number) => {
+    setUserBalance(newBalance);
+  };
+
+  const handleBackToHome = () => {
+    navigate('/');
+  };
+
+  return (
+    <Pagamento 
+      user={user}
+      userBalance={userBalance}
+      onUpdateBalance={handleUpdateBalance}
+      onBackToHome={handleBackToHome}
+    />
+  );
+}
+
 function App() {
   return (
     <Router>
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/deposito" element={<DepositoPage />} />
+        <Route path="/pagamento" element={<PagamentoPage />} />
         <Route path="/carteira" element={<MinhaCarteiraPage />} />
         <Route path="/entregas" element={<MinhasEntregasPage />} />
         <Route path="/saque" element={<SaquePage />} />

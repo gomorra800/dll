@@ -1,52 +1,28 @@
-import React, { useState } from 'react';
-import { ArrowLeft, ShoppingCart, ChevronDown, Shield } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { ArrowLeft, ShoppingCart, ChevronDown, Shield, Copy, Clock } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
-interface DepositoProps {
+interface PagamentoProps {
   user: any;
   userBalance: number;
   onUpdateBalance: (newBalance: number) => void;
   onBackToHome: () => void;
+  depositValue?: number;
 }
 
-const Deposito: React.FC<DepositoProps> = ({ user, userBalance, onUpdateBalance, onBackToHome }) => {
-  const [selectedValue, setSelectedValue] = useState<number | null>(60);
-  const [customValue, setCustomValue] = useState<string>('60');
+const Pagamento: React.FC<PagamentoProps> = ({ user, userBalance, onUpdateBalance, onBackToHome, depositValue = 60 }) => {
   const [showProfileDropdown, setShowProfileDropdown] = useState(false);
+  const [timeLeft, setTimeLeft] = useState(553); // 09:13 em segundos
   const navigate = useNavigate();
 
-  const predefinedValues = [
-    { value: 30, label: 'R$ 30,00' },
-    { value: 60, label: 'R$ 60,00' },
-    { value: 120, label: 'R$ 120,00' },
-    { value: 240, label: 'R$ 240,00' },
-    { value: 300, label: 'R$ 300,00' },
-    { value: 600, label: 'R$ 600,00' }
-  ];
-
-  const handleValueSelect = (value: number) => {
-    setSelectedValue(value);
-    setCustomValue(value.toString());
-  };
-
-  const handleCustomValueChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
-    setCustomValue(value);
-    const numValue = parseFloat(value);
-    if (!isNaN(numValue)) {
-      setSelectedValue(numValue);
-    } else {
-      setSelectedValue(null);
+  // Função para obter as iniciais do nome
+  const getInitials = (name: string) => {
+    if (!name) return 'U';
+    const names = name.trim().split(' ');
+    if (names.length === 1) {
+      return names[0].charAt(0).toUpperCase();
     }
-  };
-
-  const handleGeneratePix = () => {
-    if (selectedValue && selectedValue >= 30) {
-      // Redirecionar para página de pagamento
-      navigate('/pagamento');
-    } else {
-      alert('Valor mínimo para depósito é R$ 30,00');
-    }
+    return (names[0].charAt(0) + names[names.length - 1].charAt(0)).toUpperCase();
   };
 
   const handleProfileClick = () => {
@@ -57,14 +33,31 @@ const Deposito: React.FC<DepositoProps> = ({ user, userBalance, onUpdateBalance,
     onBackToHome();
   };
 
-  // Função para obter as iniciais do nome
-  const getInitials = (name: string) => {
-    if (!name) return 'U';
-    const names = name.trim().split(' ');
-    if (names.length === 1) {
-      return names[0].charAt(0).toUpperCase();
-    }
-    return (names[0].charAt(0) + names[names.length - 1].charAt(0)).toUpperCase();
+  const handleCopyPix = () => {
+    // Função para copiar código PIX - deixada vazia para futura integração
+    console.log('Copiar código PIX');
+  };
+
+  // Timer countdown
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setTimeLeft((prev) => {
+        if (prev <= 0) {
+          clearInterval(timer);
+          return 0;
+        }
+        return prev - 1;
+      });
+    }, 1000);
+
+    return () => clearInterval(timer);
+  }, []);
+
+  // Formatar tempo
+  const formatTime = (seconds: number) => {
+    const mins = Math.floor(seconds / 60);
+    const secs = seconds % 60;
+    return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
   };
 
   return (
@@ -101,7 +94,10 @@ const Deposito: React.FC<DepositoProps> = ({ user, userBalance, onUpdateBalance,
             </div>
             
             {/* Botão Depositar */}
-            <button className="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg font-medium">
+            <button 
+              onClick={() => navigate('/deposito')}
+              className="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg font-medium"
+            >
               Depositar
             </button>
             
@@ -128,14 +124,6 @@ const Deposito: React.FC<DepositoProps> = ({ user, userBalance, onUpdateBalance,
                 <ChevronDown className={`w-4 h-4 text-gray-400 transition-transform duration-200 ${showProfileDropdown ? 'rotate-180' : ''}`} />
               </button>
             </div>
-
-            <style jsx>{`
-              input[type="number"]::-webkit-outer-spin-button,
-              input[type="number"]::-webkit-inner-spin-button {
-                -webkit-appearance: none;
-                margin: 0;
-              }
-            `}</style>
           </div>
         </div>
       </header>
@@ -224,75 +212,92 @@ const Deposito: React.FC<DepositoProps> = ({ user, userBalance, onUpdateBalance,
             />
           </div>
 
-          {/* Deposit Form */}
-          <div className="space-y-6">
-            <h2 className="text-xl font-bold text-center text-white mb-6">
-              Digite ou selecione o valor
-            </h2>
+          {/* Payment Method Info */}
+          <div className="flex items-center justify-center space-x-2 p-3 rounded-lg border border-green-500/30 mb-8" style={{ backgroundColor: '#111219' }}>
+            <Shield className="w-5 h-5 text-green-500" />
+            <span className="text-green-400 font-medium text-sm">Método de pagamento seguro</span>
+          </div>
 
-            {/* Payment Method Info */}
-            <div className="flex items-center justify-center space-x-2 p-3 rounded-lg border border-green-500/30" style={{ backgroundColor: '#111219' }}>
-              <Shield className="w-5 h-5 text-green-500" />
-              <span className="text-green-400 font-medium text-sm">Método de pagamento seguro</span>
-            </div>
+          {/* Deposit Value */}
+          <div className="text-center mb-8">
+            <p className="text-gray-400 text-sm mb-2">Valor do depósito:</p>
+            <h2 className="text-white text-3xl font-bold">R$ {depositValue.toFixed(2).replace('.', ',')}</h2>
+          </div>
 
-            {/* Predefined Values Grid */}
-            <div className="grid grid-cols-3 gap-2 mb-6">
-              {predefinedValues.map((item) => (
-                <button
-                  key={item.value}
-                  onClick={() => handleValueSelect(item.value)}
-                  className={`relative p-4 rounded-lg font-normal text-sm transition-all duration-200 ${
-                    selectedValue === item.value
-                      ? 'bg-green-500 text-white'
-                      : 'text-white hover:bg-gray-700'
-                  }`}
-                  style={selectedValue !== item.value ? { backgroundColor: '#111219' } : {}}
-                >
-                  {item.recommended && (
-                    <div className="absolute -top-1 -right-1 bg-yellow-500 text-black text-xs font-bold px-1 py-0.5 rounded-full">
-                      Recomendado
-                    </div>
-                  )}
-                  <div className="mb-1">{item.label}</div>
-                </button>
-              ))}
-            </div>
-
-            {/* Custom Value Input */}
-            <div className="space-y-4">
-              <div className="flex items-center space-x-2 p-3 rounded-lg border border-gray-600" style={{ backgroundColor: '#111219' }}>
-                <span className="text-white text-lg font-bold">R$</span>
-                <input
-                  type="number"
-                  value={customValue}
-                  onChange={handleCustomValueChange}
-                  min="30"
-                  max="5000"
-                  className="bg-transparent text-white text-xl font-normal flex-1 border-none outline-none"
-                  placeholder="60"
-                  style={{ 
-                    appearance: 'textfield',
-                    MozAppearance: 'textfield'
-                  }}
-                />
-              </div>
-              
-              <div className="flex justify-between text-sm text-gray-400">
-                <span>Mínimo: R$ 30,00</span>
-                <span>Máximo: R$ 5.000,00</span>
+          {/* QR Code Section */}
+          <div className="text-center mb-8">
+            <div className="w-48 h-48 mx-auto mb-4 bg-white rounded-lg flex items-center justify-center">
+              {/* QR Code placeholder - deixado em branco para futura integração */}
+              <div className="w-44 h-44 bg-gray-100 rounded flex items-center justify-center">
+                <span className="text-gray-400 text-sm">QR Code</span>
               </div>
             </div>
+          </div>
 
-            {/* Generate PIX Button */}
-            <button
-              onClick={handleGeneratePix}
-              disabled={!selectedValue || selectedValue < 30}
-              className="w-full bg-green-500 hover:bg-green-600 disabled:bg-gray-600 disabled:cursor-not-allowed text-white py-3 rounded-lg font-bold text-base flex items-center justify-center space-x-2 transition-colors"
-            >
-              <Shield className="w-5 h-5" />
-              <span>Gerar PIX</span>
-            </button>
+          {/* PIX Code Section */}
+          <div className="mb-8">
+            <p className="text-center text-gray-400 text-sm mb-4">Ou copie o código PIX:</p>
+            <div className="flex items-center space-x-2">
+              <input
+                type="text"
+                value="" // Deixado vazio para futura integração
+                readOnly
+                placeholder="Código PIX será gerado aqui"
+                className="flex-1 px-4 py-3 rounded-lg text-white text-sm focus:outline-none"
+                style={{ backgroundColor: '#111219' }}
+              />
+              <button
+                onClick={handleCopyPix}
+                className="bg-green-500 hover:bg-green-600 text-white p-3 rounded-lg"
+              >
+                <Copy className="w-5 h-5" />
+              </button>
+            </div>
+          </div>
+
+          {/* Timer Section */}
+          <div className="text-center mb-8">
+            <div className="flex items-center justify-center space-x-2 mb-4">
+              <Clock className="w-5 h-5 text-orange-400" />
+              <span className="text-orange-400 text-sm">O tempo para você pagar acaba em:</span>
+            </div>
+            <div className="text-white text-4xl font-bold mb-4">
+              {formatTime(timeLeft)}
+            </div>
+            {/* Progress Bar */}
+            <div className="w-full bg-gray-700 rounded-full h-2 mb-6">
+              <div 
+                className="bg-green-500 h-2 rounded-full transition-all duration-1000"
+                style={{ width: `${(timeLeft / 553) * 100}%` }}
+              ></div>
+            </div>
+          </div>
+
+          {/* Instructions */}
+          <div className="space-y-3 mb-8">
+            <div className="flex items-start space-x-3">
+              <span className="text-white font-bold">1.</span>
+              <span className="text-white text-sm">Abra o aplicativo do seu banco</span>
+            </div>
+            <div className="flex items-start space-x-3">
+              <span className="text-gray-400 font-bold">2.</span>
+              <span className="text-gray-400 text-sm">Escolha a opção "Pagar com PIX"</span>
+            </div>
+            <div className="flex items-start space-x-3">
+              <span className="text-gray-400 font-bold">3.</span>
+              <span className="text-gray-400 text-sm">Escaneie o QR code ou cole o código copiado</span>
+            </div>
+            <div className="flex items-start space-x-3">
+              <span className="text-gray-400 font-bold">4.</span>
+              <span className="text-gray-400 text-sm">Confirme as informações e finalize o pagamento</span>
+            </div>
+          </div>
+
+          {/* Footer Info */}
+          <div className="text-center">
+            <p className="text-gray-500 text-xs">
+              99% dos depósitos por PIX são processados em poucos segundos. O pagamento será confirmado automaticamente após ser processado.
+            </p>
           </div>
         </div>
       </div>
@@ -300,4 +305,4 @@ const Deposito: React.FC<DepositoProps> = ({ user, userBalance, onUpdateBalance,
   );
 };
 
-export default Deposito;
+export default Pagamento;
