@@ -132,7 +132,10 @@ const SuperPremios: React.FC<SuperPremiosProps> = ({ user, userBalance, onUpdate
             </div>
             
             {/* Botão Depositar */}
-            <button className="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg font-medium">
+            <button 
+              onClick={() => navigate('/deposito')}
+              className="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg font-medium"
+            >
               Depositar
             </button>
             
